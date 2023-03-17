@@ -15,9 +15,9 @@ struct Move {
     let player: Player
     let boardIndex: Int
     
-    var indicator: String {
-        return player == .cross ? "cross" : "zero"
-    }
+//    var indicator: String {
+//        return player == .cross ? "cross" : "zero"
+//    }
 }
 
 
@@ -41,17 +41,28 @@ struct GameView: View {
                     LazyVGrid(columns: columns, spacing: 17) {
                         ForEach(0..<9) { i in
                             ZStack {
+                                Rectangle()
+                                    .foregroundColor(.white)
+                                    .frame(width: geometry.size.width/3 - 15,
+                                           height: geometry.size.width/3 - 15)
                                 
-//                                CrossView(angleForce: 0.12)
-//                                    .frame(width: geometry.size.width/3 - 15,
-//                                           height: geometry.size.width/3 - 15)
-                                
-//                                Circle()
-//                                    .strokeBorder(lineWidth: 9)
-//                                    .frame(width: geometry.size.width/3 - 15,
-//                                           height: geometry.size.width/3 - 15)
+                                if let move = moves[i]?.player {
+                                    switch move {
+                                    case .cross:
+                                        CrossView(angleForce: 0.12)
+                                            .frame(width: geometry.size.width/3 - 15,
+                                                   height: geometry.size.width/3 - 15)
+                                    case .zero:
+                                        Circle()
+                                            .strokeBorder(lineWidth: 9)
+                                            .frame(width: geometry.size.width/3 - 15,
+                                                   height: geometry.size.width/3 - 15)
+                                    }
+                                }
+
                             }
                             .onTapGesture {
+                                if isCellEmpty(in: moves, for: i) { return }
                                 moves[i] = Move(player: isCrossTurn ? .cross : .zero, boardIndex: i)
                                 isCrossTurn.toggle()
                             }
@@ -59,11 +70,12 @@ struct GameView: View {
                     }
                     Spacer()
                 } .padding(3)
-                
             }
-            
         }
- 
+    }
+    
+    func isCellEmpty(in moves: [Move?], for index: Int) -> Bool {
+        moves.contains(where: { $0?.boardIndex == index })
     }
     
 }
