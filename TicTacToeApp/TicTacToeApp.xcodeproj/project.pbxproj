@@ -12,6 +12,7 @@
 		241C59D229C3874000F744A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 241C59D129C3874000F744A1 /* Preview Assets.xcassets */; };
 		248999BA29C4DA2200DBE791 /* EmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999B929C4DA2200DBE791 /* EmptyCellView.swift */; };
 		248999BC29C4DB0100DBE791 /* PlayerIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999BB29C4DB0100DBE791 /* PlayerIndicatorView.swift */; };
+		248999C129C4EE8500DBE791 /* EndGameAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999C029C4EE8500DBE791 /* EndGameAlert.swift */; };
 		24F2F90B29C3955800B0D895 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2F90A29C3955800B0D895 /* GameView.swift */; };
 		24F2F90D29C3956300B0D895 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2F90C29C3956300B0D895 /* GameViewModel.swift */; };
 		24F2F90F29C3956F00B0D895 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2F90E29C3956F00B0D895 /* GameModel.swift */; };
@@ -28,6 +29,8 @@
 		241C59D129C3874000F744A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		248999B929C4DA2200DBE791 /* EmptyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellView.swift; sourceTree = "<group>"; };
 		248999BB29C4DB0100DBE791 /* PlayerIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIndicatorView.swift; sourceTree = "<group>"; };
+		248999BD29C4EA1E00DBE791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		248999C029C4EE8500DBE791 /* EndGameAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameAlert.swift; sourceTree = "<group>"; };
 		24F2F90A29C3955800B0D895 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		24F2F90C29C3956300B0D895 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		24F2F90E29C3956F00B0D895 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
@@ -69,8 +72,9 @@
 			children = (
 				241C59CA29C3873F00F744A1 /* TicTacToeAppApp.swift */,
 				241C59D829C388E700F744A1 /* GameModule */,
+				248999BF29C4EE3700DBE791 /* Alerts */,
 				24F2F91029C39A7900B0D895 /* Custom */,
-				241C59CE29C3874000F744A1 /* Assets.xcassets */,
+				248999BE29C4EA8900DBE791 /* SupportingFiles */,
 				241C59D029C3874000F744A1 /* Preview Content */,
 			);
 			path = TicTacToeApp;
@@ -92,6 +96,23 @@
 				24F2F90A29C3955800B0D895 /* GameView.swift */,
 			);
 			path = GameModule;
+			sourceTree = "<group>";
+		};
+		248999BE29C4EA8900DBE791 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				241C59CE29C3874000F744A1 /* Assets.xcassets */,
+				248999BD29C4EA1E00DBE791 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		248999BF29C4EE3700DBE791 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				248999C029C4EE8500DBE791 /* EndGameAlert.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		24F2F91029C39A7900B0D895 /* Custom */ = {
@@ -193,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				248999C129C4EE8500DBE791 /* EndGameAlert.swift in Sources */,
 				24F2F91A29C3AB6800B0D895 /* CircleCustomView.swift in Sources */,
 				24F2F90F29C3956F00B0D895 /* GameModel.swift in Sources */,
 				24F2F90D29C3956300B0D895 /* GameViewModel.swift in Sources */,
@@ -334,8 +356,8 @@
 				DEVELOPMENT_TEAM = XY95NKW6BH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TicTacToeApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -365,8 +387,8 @@
 				DEVELOPMENT_TEAM = XY95NKW6BH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TicTacToeApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -35,7 +35,7 @@ struct GameView: View {
                         }
                     }
                     Spacer()
-                } .padding(3)
+                } .padding(3).disabled(viewModel.isGameboardDisabled)
             }
         }
     }
