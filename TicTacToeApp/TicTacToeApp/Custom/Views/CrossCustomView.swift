@@ -1,5 +1,5 @@
 //
-//  CrossView.swift
+//  CrossCustomView.swift
 //  TicTacToeApp
 //
 //  Created by Alexander Vagin on 16.03.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CrossView: View {
+struct CrossCustomView: View {
     
     let angleForce: CGFloat
     

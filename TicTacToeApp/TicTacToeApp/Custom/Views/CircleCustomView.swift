@@ -1,5 +1,5 @@
 //
-//  CircleView.swift
+//  CircleCustomView.swift
 //  TicTacToeApp
 //
 //  Created by Alexander Vagin on 16.03.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CircleView: View {
+struct CircleCustomView: View {
     
     let clockTotal: Float
     let clockValue: Float
@@ -37,6 +37,6 @@ struct CircleView: View {
 
 struct CustomCircle_Previews: PreviewProvider {
     static var previews: some View {
-        CircleView(clockTotal: 100, clockValue: 40)
+        CircleCustomView(clockTotal: 100, clockValue: 40)
     }
 }
