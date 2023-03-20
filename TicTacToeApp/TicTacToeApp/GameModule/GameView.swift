@@ -15,7 +15,7 @@ struct GameView: View {
         GeometryReader { geometry in
             ZStack {
                 GridCustomView(frameGrid: (width: geometry.size.width, height: geometry.size.width),
-                               indentLines: 8,
+                               indentLines: 12,
                                thickness: 2,
                                opacity: 0.2)
                 VStack {

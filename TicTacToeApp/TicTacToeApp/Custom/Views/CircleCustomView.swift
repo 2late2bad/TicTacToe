@@ -9,34 +9,25 @@ import SwiftUI
 
 struct CircleCustomView: View {
     
-    let clockTotal: Float
-    let clockValue: Float
+    @State private var isRotated: Bool = false
+    let lineWidth: CGFloat
     
-    var radius: CGFloat = 200
-    var lineWidth: CGFloat = 16
-    var tintColor: Color = .orange
-
     var body: some View {
-        
-        ZStack {
-            
-            Circle()
-                .stroke(tintColor .opacity(0.2),
-                        style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-            
-            Circle()
-                .trim(from: 0.0, to: 0.4)
-                .stroke(tintColor,
-                        style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-            
-        }
-        .frame(width: radius)
-        
+        Circle()
+            .strokeBorder(lineWidth: lineWidth)
+            .rotation3DEffect(.degrees(isRotated ? 0 : -90), axis: (x: 0.5, y: 0, z: 1))
+            .opacity(isRotated ? 1 : 0)
+            .onAppear {
+                withAnimation(.easeOut(duration: 0.2)) {
+                    isRotated = true
+                }
+            }
     }
 }
 
 struct CustomCircle_Previews: PreviewProvider {
     static var previews: some View {
-        CircleCustomView(clockTotal: 100, clockValue: 40)
+        CircleCustomView(lineWidth: 16)
+            .frame(width: 200)
     }
 }

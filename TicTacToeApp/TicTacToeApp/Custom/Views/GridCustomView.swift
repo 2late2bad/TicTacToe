@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GridCustomView: View {
     
+    @State private var actualFrame: (width: CGFloat, height: CGFloat) = (width: 0, height: 0)
     let frameGrid: (width: CGFloat, height: CGFloat)
     var indentLines: CGFloat
     let thickness: CGFloat
@@ -21,18 +22,16 @@ struct GridCustomView: View {
         self.opacity = opacity
     }
     
-    
     var body: some View {
-        
         ZStack {
             VStack {
                 Spacer()
                 Rectangle()
-                    .frame(width: frameGrid.width - indentLines, height: thickness)
+                    .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
                     .opacity(opacity)
                 Spacer()
                 Rectangle()
-                    .frame(width: frameGrid.width - indentLines, height: thickness)
+                    .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
                     .opacity(opacity)
                 Spacer()
             }
@@ -41,18 +40,27 @@ struct GridCustomView: View {
             VStack {
                 Spacer()
                 Rectangle()
-                    .frame(width: frameGrid.width - indentLines, height: thickness)
+                    .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
                     .opacity(opacity)
                 Spacer()
                 Rectangle()
-                    .frame(width: frameGrid.width - indentLines, height: thickness)
+                    .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
                     .opacity(opacity)
                 Spacer()
             }
             .frame(width: frameGrid.width, height: frameGrid.height)
             .rotationEffect(Angle(degrees: 90))
         }
-        
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.8)) {
+                actualFrame.width = frameGrid.width
+                actualFrame.height = frameGrid.height
+            }
+        }
+    }
+    
+    func getFrameWidthNonNegative(_ width: CGFloat, _ indent: CGFloat) -> CGFloat {
+        (width - indent) < 0 ? indent : (width - indent)
     }
 }
 

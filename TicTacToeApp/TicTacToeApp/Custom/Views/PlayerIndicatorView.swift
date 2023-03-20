@@ -19,9 +19,7 @@ struct PlayerIndicatorView: View {
                 .frame(width: proxy.size.width/3 - 15,
                        height: proxy.size.width/3 - 15)
         case .zero:
-            // add custom circle
-            Circle()
-                .strokeBorder(lineWidth: 9)
+            CircleCustomView(lineWidth: 10)
                 .frame(width: proxy.size.width/3 - 15,
                        height: proxy.size.width/3 - 15)
         }

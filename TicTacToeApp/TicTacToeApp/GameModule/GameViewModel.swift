@@ -13,9 +13,9 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @Published var moves: [Move?] = Array(repeating: nil, count: 9)
-    @Published var isCrossTurn = true
     @Published var isGameboardDisabled = false
+    var moves: [Move?] = Array(repeating: nil, count: 9)
+    var isCrossTurn = true
     
     func processPlayerMove(for position: Int) {
         if isCellNotEmpty(in: moves, for: position) { return }
@@ -28,23 +28,32 @@ final class GameViewModel: ObservableObject {
             return
         }
         
+        if checkWinCondition(for: .zero, in: moves) {
+            print("Нолик победил!")
+            return
+        }
+        
         if checkForDraw(in: moves) {
             print("Ничья")
             return
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { [self] in
-            /// integration AI
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             isGameboardDisabled = false
-            if checkWinCondition(for: .zero, in: moves) {
-                print("Нолик победил!")
-                return
-            }
-            if checkForDraw(in: moves) {
-                print("Ничья")
-                return
-            }
         }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { [self] in
+//            /// integration AI
+//            isGameboardDisabled = false
+//            if checkWinCondition(for: .zero, in: moves) {
+//                print("Нолик победил!")
+//                return
+//            }
+//            if checkForDraw(in: moves) {
+//                print("Ничья")
+//                return
+//            }
+//        }
     }
     
     // Проверка, занята ли ячейка
