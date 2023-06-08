@@ -15,7 +15,7 @@ struct PlayerIndicatorView: View {
     var body: some View {
         switch move {
         case .cross:
-            CrossCustomView(angleForce: 0.12)
+            CrossCustomView(anim: true, angleForce: 0.12)
                 .frame(width: proxy.size.width/3 - 15,
                        height: proxy.size.width/3 - 15)
         case .zero:
