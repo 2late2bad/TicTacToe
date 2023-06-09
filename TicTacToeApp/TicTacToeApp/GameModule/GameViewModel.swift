@@ -14,19 +14,31 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible())]
     
     @Published var isGameboardDisabled = false
-    var isCrossTurn = true
+    @Published var showingSheet: Bool = false
+    @Published var flashingColor: Color = .black
+    @Published var animationAmount: Double = 0.001
+    @Published var muteSound: Bool = false
     
-    var moves: [Move?] = Array(repeating: nil, count: 9)
-    var winningCells: [Int] = []
-    var currentRound = 1
-    var sumOfWins: Int = 5 //
-    var xWins: Int = 0
-    var oWins: Int = 5 //
+    let sumOfWins: Int
+    var isCrossTurn = true
+    var moves: [Move?]
+    var winningCells: [Int]
+    var currentRound: Int
+    var xWins: Int
+    var oWins: Int
+    
+    init(bo: Int) {
+        moves = Array(repeating: nil, count: 9)
+        winningCells = []
+        currentRound = 1
+        sumOfWins = bo
+        xWins = 0
+        oWins = bo
+    }
 
     func processPlayerMove(for position: Int) {
         if isCellNotEmpty(in: moves, for: position) { return }
         moves[position] = Move(player: isCrossTurn ? .cross : .zero, boardIndex: position)
-        isCrossTurn.toggle()
         isGameboardDisabled = true
         
         if checkWinCondition(for: .cross, in: moves) {
@@ -43,6 +55,8 @@ final class GameViewModel: ObservableObject {
             checkWinMatch(for: nil)
             return
         }
+        
+        isCrossTurn.toggle()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             isGameboardDisabled = false
@@ -96,18 +110,38 @@ final class GameViewModel: ObservableObject {
             }
         }
     }
+    // Рестарт игры
+    func restartGame() {
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            moves = Array(repeating: nil, count: 9)
+            winningCells = []
+            isCrossTurn = true
+            isGameboardDisabled = false
+            currentRound = 1
+            xWins = 0
+            oWins = sumOfWins
+        //}
+    }
     // Проверка на победу в матче
     func checkWinMatch(for player: Player?) {
         switch player {
         case .cross:
             if (xWins + 1) == sumOfWins {
-                
+                xWins += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+                    showingSheet = true
+                    //restartGame()
+                }
             } else {
                 restartBoard(point: .cross)
             }
         case .zero:
             if (oWins - 1) == 0 {
-                
+                oWins -= 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+                    showingSheet = true
+                    //restartGame()
+                }
             } else {
                 restartBoard(point: .zero)
             }
