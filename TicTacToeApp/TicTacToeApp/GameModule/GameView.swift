@@ -9,12 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     
-    @StateObject private var viewModel = GameViewModel()
-    @State private var flashingColor: Color = .black
-
-    //
-    @State private var muteSound: Bool = false
-    @State private var animationAmount: Double = 0.001
+    @StateObject private var viewModel = GameViewModel(bo: 1)
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,32 +24,27 @@ struct GameView: View {
                 }
                 Spacer()
                 Button {
-                    muteSound.toggle()
+                    viewModel.muteSound.toggle()
                 } label: {
-                    Image(systemName: muteSound ? "speaker.slash.fill" : "speaker")
+                    Image(systemName: viewModel.muteSound ? "speaker.slash.fill" : "speaker")
                         .imageScale(.large)
-                        .foregroundColor(muteSound ? .red : .gray)
+                        .foregroundColor(viewModel.muteSound ? .red : .gray)
                 }
             }
             .padding()
             
             VStack {
                 
-                HStack {
-                    Text("ROUND")
-                        .font(Font.custom("Cyberpunk", size: 44))
-                    Text("\(viewModel.currentRound)")
-                        .font(Font.custom("Disket Mono", size: 40))
-                        .offset(y: 5)
-                }
-                .padding(.bottom, 1)
-                
+                Text("ROUND \(viewModel.currentRound)")
+                    .font(Font.custom("Marske", size: 50))
+
                 Text("FIRST BLOOD")
                     .font(Font.custom("Cyberpunk", size: 30))
                     .foregroundColor(.brown)
-                    .scaleEffect(animationAmount)
-                    .opacity(!viewModel.winningCells.isEmpty ? animationAmount : 0)
-                    .animation(.easeInOut(duration: 0.3), value: animationAmount)
+                    .scaleEffect(viewModel.animationAmount)
+                    .opacity(!viewModel.winningCells.isEmpty ? viewModel.animationAmount : 0)
+                    .animation(.easeInOut(duration: 0.25).delay(0.2), value: viewModel.animationAmount)
+                    .padding(.bottom, 20)
                 
                 ZStack {
                     GridCustomView(frameGrid: (width: geometry.size.width, height: geometry.size.width),
@@ -69,15 +59,15 @@ struct GameView: View {
                                     
                                     if let move = viewModel.moves[i]?.player {
                                         PlayerIndicatorView(proxy: geometry, move: move)
-                                            .foregroundColor(viewModel.winningCells.contains(i) ? flashingColor : .black)
-                                            .animation(.linear(duration: 0.07).repeatCount(10).delay(0.3), value: flashingColor)
+                                            .foregroundColor(viewModel.winningCells.contains(i) ? viewModel.flashingColor : .black)
+                                            .animation(.linear(duration: 0.07).repeatCount(10).delay(0.3), value: viewModel.flashingColor)
                                             .onAppear {
                                                 if viewModel.winningCells.contains(i) {
-                                                    flashingColor = .red
-                                                    animationAmount = 1
+                                                    viewModel.flashingColor = .red
+                                                    viewModel.animationAmount = 1
                                                 } else {
-                                                    flashingColor = .black
-                                                    animationAmount = 0.001
+                                                    viewModel.flashingColor = .black
+                                                    viewModel.animationAmount = 0.001
                                                 }
                                             }
                                     }
@@ -132,7 +122,10 @@ struct GameView: View {
                     .padding(.top, 20)
                     .foregroundColor(.gray)
             }
-            .padding(.top, 65)
+            .padding(.top, 75)
+        }
+        .fullScreenCover(isPresented: $viewModel.showingSheet) {
+            WinnerView(viewModel: viewModel)
         }
     }
 }

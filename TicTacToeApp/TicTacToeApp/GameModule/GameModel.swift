@@ -7,8 +7,9 @@
 
 import Foundation
 
-enum Player {
-    case cross, zero
+enum Player: String {
+    case cross = "Cross"
+    case zero = "Zero"
 }
 
 struct Move {
