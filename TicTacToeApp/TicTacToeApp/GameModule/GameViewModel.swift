@@ -18,24 +18,25 @@ final class GameViewModel: ObservableObject {
     @Published var flashingColor: Color = .black
     @Published var animationAmount: Double = 0.001
     @Published var muteSound: Bool = false
+    @Published var showingExitAlert = false
+    @Published var sumOfWins: Int {
+        willSet {
+            oWins = newValue
+        }
+    }
     
-    let sumOfWins: Int
     var isCrossTurn = true
-    var moves: [Move?]
-    var winningCells: [Int]
-    var currentRound: Int
-    var xWins: Int
+    var moves: [Move?] = Array(repeating: nil, count: 9)
+    var winningCells: [Int] = []
+    var currentRound: Int = 1
+    var xWins: Int = 0
     var oWins: Int
     
-    init(bo: Int) {
-        moves = Array(repeating: nil, count: 9)
-        winningCells = []
-        currentRound = 1
-        sumOfWins = bo
-        xWins = 0
-        oWins = bo
+    init(sumOfWins: Int = 1) {
+        self.sumOfWins = sumOfWins
+        oWins = sumOfWins
     }
-
+    
     func processPlayerMove(for position: Int) {
         if isCellNotEmpty(in: moves, for: position) { return }
         moves[position] = Move(player: isCrossTurn ? .cross : .zero, boardIndex: position)
@@ -62,18 +63,18 @@ final class GameViewModel: ObservableObject {
             isGameboardDisabled = false
         }
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { [self] in
-//            /// integration AI
-//            isGameboardDisabled = false
-//            if checkWinCondition(for: .zero, in: moves) {
-//                print("Нолик победил!")
-//                return
-//            }
-//            if checkForDraw(in: moves) {
-//                print("Ничья")
-//                return
-//            }
-//        }
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { [self] in
+        //            /// integration AI
+        //            isGameboardDisabled = false
+        //            if checkWinCondition(for: .zero, in: moves) {
+        //                print("Нолик победил!")
+        //                return
+        //            }
+        //            if checkForDraw(in: moves) {
+        //                print("Ничья")
+        //                return
+        //            }
+        //        }
     }
     
     // Проверка, занята ли ячейка
@@ -97,7 +98,7 @@ final class GameViewModel: ObservableObject {
     func checkForDraw(in moves: [Move?]) -> Bool {
         moves.compactMap { $0 }.count == 9
     }
-    // Рестарт доски
+    // Рестарт раунда
     func restartBoard(point: Player?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             moves = Array(repeating: nil, count: 9)
@@ -112,15 +113,13 @@ final class GameViewModel: ObservableObject {
     }
     // Рестарт игры
     func restartGame() {
-        //DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            moves = Array(repeating: nil, count: 9)
-            winningCells = []
-            isCrossTurn = true
-            isGameboardDisabled = false
-            currentRound = 1
-            xWins = 0
-            oWins = sumOfWins
-        //}
+        moves = Array(repeating: nil, count: 9)
+        winningCells = []
+        isCrossTurn = true
+        isGameboardDisabled = false
+        currentRound = 1
+        xWins = 0
+        oWins = sumOfWins
     }
     // Проверка на победу в матче
     func checkWinMatch(for player: Player?) {
@@ -130,7 +129,6 @@ final class GameViewModel: ObservableObject {
                 xWins += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
                     showingSheet = true
-                    //restartGame()
                 }
             } else {
                 restartBoard(point: .cross)
@@ -140,7 +138,6 @@ final class GameViewModel: ObservableObject {
                 oWins -= 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
                     showingSheet = true
-                    //restartGame()
                 }
             } else {
                 restartBoard(point: .zero)

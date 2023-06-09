@@ -9,21 +9,21 @@ import SwiftUI
 
 struct WinnerView: View {
     
-    @ObservedObject var viewModel: GameViewModel
+    @EnvironmentObject var gameVM: GameViewModel
     
     var body: some View {
-        Text("Winner: \(viewModel.isCrossTurn ? Player.cross.rawValue : Player.zero.rawValue)")
+        Text("Winner: \(gameVM.isCrossTurn ? Player.cross.rawValue : Player.zero.rawValue)")
         Button {
-            viewModel.restartGame()
-            viewModel.showingSheet = false
+            gameVM.restartGame()
+            gameVM.showingSheet = false
         } label: {
             Text("back")
         }
     }
 }
 
-struct WinnerView_Previews: PreviewProvider {
-    static var previews: some View {
-        WinnerView(viewModel: GameViewModel(bo: 3))
-    }
-}
+//struct WinnerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WinnerView(gameVM: GameViewModel(bo: 3))
+//    }
+//}
