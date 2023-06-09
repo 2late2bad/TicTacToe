@@ -12,14 +12,16 @@ struct GoButtonView: View {
     let color: Color
     
     var body: some View {
-        Button("GO!") {
-            //
+        NavigationLink {
+            GameView()
+        } label: {
+            Text("GO!")
+                .padding(40)
+                .background(color)
+                .foregroundColor(.white)
+                .clipShape(Circle())
+                .font(Font.system(size: 30, weight: .medium, design: .serif))
         }
-        .padding(40)
-        .background(color)
-        .foregroundColor(.white)
-        .clipShape(Circle())
-        .font(Font.system(size: 30, weight: .medium, design: .serif))
     }
 }
 
