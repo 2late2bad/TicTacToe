@@ -5,9 +5,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Cyberpunk.ttf</string>
-		<string>Cyberpunk-Regular.ttf</string>
 		<string>SYNNova-Light.otf</string>
 		<string>DisketMonoRegular.ttf</string>
+		<string>Marske.ttf</string>
+		<string>NewZelek.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
