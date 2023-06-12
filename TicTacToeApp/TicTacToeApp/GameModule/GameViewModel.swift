@@ -13,30 +13,32 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @Published var isGameboardDisabled = false
-    @Published var showingSheet: Bool = false
-    @Published var flashingColor: Color = .black
-    @Published var animationAmount: Double = 0.001
-    @Published var muteSound: Bool = false
-    @Published var showingExitAlert = false
-    @Published var sumOfWins: Int {
+    @Published var alertItem: AlertItem?
+    @Published var isGameboardDisabled            = false
+    @Published var moves: [Move?]                 = Array(repeating: nil, count: 9)
+    @Published var selectedTypeOfGame: TypeGame   = .PvP
+    @Published var selectedComplexity: Complexity = .Easy
+    @Published var sumOfWins: Int = 1 {
         willSet {
             oWins = newValue
         }
     }
     
+    @Published var flashingColor: Color        = .black
+    @Published var animationAmount: Double     = 0.001
+    @Published var muteSound: Bool             = false
+    @Published var showingSheet: Bool          = false
+    @Published var showingAlert: Bool          = false
+    @Published var showingActiveAIDialog: Bool = false
+    
+    let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence()
     var isCrossTurn = true
-    var moves: [Move?] = Array(repeating: nil, count: 9)
     var winningCells: [Int] = []
     var currentRound: Int = 1
     var xWins: Int = 0
-    var oWins: Int
-    
-    init(sumOfWins: Int = 1) {
-        self.sumOfWins = sumOfWins
-        oWins = sumOfWins
-    }
-    
+    var oWins: Int = 1
+
+    // Ход игрока/AI
     func processPlayerMove(for position: Int) {
         if isCellNotEmpty(in: moves, for: position) { return }
         moves[position] = Move(player: isCrossTurn ? .cross : .zero, boardIndex: position)
@@ -105,6 +107,7 @@ private extension GameViewModel {
     func isCellNotEmpty(in moves: [Move?], for index: Int) -> Bool {
         moves.contains(where: { $0?.boardIndex == index })
     }
+    
     // Проверка на победу игрока в раунде
     func checkWinCondition(for player: Player, in moves: [Move?]) -> Bool {
         let winPatterns: Set<Set<Int>> = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
@@ -118,10 +121,12 @@ private extension GameViewModel {
         }
         return false
     }
+    
     // Проверка на ничью в раунде
     func checkForDraw(in moves: [Move?]) -> Bool {
         moves.compactMap { $0 }.count == 9
     }
+    
     // Рестарт раунда
     func restartBoard(point: Player?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
@@ -135,16 +140,7 @@ private extension GameViewModel {
             }
         }
     }
-    // Рестарт игры
-    func restartGame() {
-        moves = Array(repeating: nil, count: 9)
-        winningCells = []
-        isCrossTurn = true
-        isGameboardDisabled = false
-        currentRound = 1
-        xWins = 0
-        oWins = sumOfWins
-    }
+    
     // Проверка на победу в матче
     func checkWinMatch(for player: Player?) {
         switch player {

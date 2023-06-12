@@ -17,18 +17,12 @@ struct GameView: View {
             
             HStack {
                 Button {
-                    gameVM.showingExitAlert = true
+                    gameVM.alertItem = AlertContext.stopGame
+                    gameVM.showingAlert = true
                 } label: {
                     Image(systemName: "xmark.circle")
                         .imageScale(.large)
                         .foregroundColor(.gray)
-                }
-                .alert("Leave the match?", isPresented: $gameVM.showingExitAlert) {
-                    Button("NO", role: .cancel) {}
-                    Button("YES", role: .destructive) {
-                        gameVM.restartGame()
-                        dismiss()
-                    }
                 }
                 Spacer()
                 Button {
@@ -45,7 +39,7 @@ struct GameView: View {
                 
                 Text("ROUND \(gameVM.currentRound)")
                     .font(Font.custom("Marske", size: 50))
-
+                
                 Text("FIRST BLOOD")
                     .font(Font.custom("Cyberpunk", size: 30))
                     .foregroundColor(.brown)
@@ -55,10 +49,10 @@ struct GameView: View {
                     .padding(.bottom, 20)
                 
                 ZStack {
-                    GridCustomView(frameGrid: (width: geometry.size.width, height: geometry.size.width),
-                                   indentLines: 12,
-                                   thickness: 2,
-                                   opacity: 0.2)
+                    GridView(frameGrid: (width: geometry.size.width, height: geometry.size.width),
+                             indentLines: 12,
+                             thickness: 2,
+                             opacity: 0.2)
                     VStack {
                         LazyVGrid(columns: gameVM.columns, spacing: 17) {
                             ForEach(0..<9) { i in
@@ -102,33 +96,42 @@ struct GameView: View {
                 .padding(.top, 50)
                 .padding(.bottom, 20)
                 
-                VStack {
-                    
+                HStack {
                     HStack {
-                        HStack {
-                            ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
-                                CrossCustomView(width: 12, height: 2, degress: 45, anim: false, angleForce: 0.14)
-                                    .frame(width: 20, height: 20)
-                                    .opacity(i < gameVM.xWins ? 1 : 0.1)
-                            }
-                        }
-                        Spacer(minLength: 20)
-                        HStack {
-                            ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
-                                CircleCustomView(lineWidth: 2)
-                                    .frame(width: 20, height: 20)
-                                    .opacity(i < gameVM.oWins ? 0.1 : 1)
-                            }
+                        ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
+                            CrossCustomView(width: 12, height: 2, degress: 45, anim: false, angleForce: 0.14)
+                                .frame(width: 20, height: 20)
+                                .opacity(i < gameVM.xWins ? 1 : 0.2)
                         }
                     }
-                    .padding([.leading, .trailing], 20)
-                    
+                    Spacer(minLength: 20)
+                    HStack {
+                        ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
+                            CircleCustomView(lineWidth: 2)
+                                .frame(width: 20, height: 20)
+                                .opacity(i < gameVM.oWins ? 0.2 : 1)
+                        }
+                    }
                 }
+                .padding([.leading, .trailing], 20)
                 
-                Text("AI: disabled")
+                Text("AI: \(gameVM.selectedTypeOfGame == .PvP ? "Disabled" : gameVM.selectedComplexity.rawValue)")
                     .font(Font.custom("Disket Mono", size: 10))
                     .padding(.top, 20)
                     .foregroundColor(.gray)
+                    .onTapGesture {
+                        if gameVM.isCrossTurn {
+                            if gameVM.selectedTypeOfGame == .AI {
+                                gameVM.alertItem = AlertContext.disableAI
+                                gameVM.showingAlert = true
+                            } else {
+                                gameVM.showingActiveAIDialog = true
+                            }
+                        } else {
+                            gameVM.alertItem = AlertContext.errorType
+                            gameVM.showingAlert = true
+                        }
+                    }
             }
             .padding(.top, 75)
         }
@@ -136,6 +139,51 @@ struct GameView: View {
         .fullScreenCover(isPresented: $gameVM.showingSheet) {
             WinnerView()
         }
+        .alert(gameVM.alertItem?.title ?? Text(""),
+               isPresented: $gameVM.showingAlert,
+               presenting: gameVM.alertItem,
+               actions: { item in
+            switch gameVM.alertItem?.type {
+            case .stopGame:
+                Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
+                Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
+                    gameVM.restartGame()
+                    gameVM.selectedComplexity = .Easy
+                    gameVM.selectedTypeOfGame = .PvP
+                    dismiss()
+                }
+            case .disableAI:
+                Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
+                Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
+                    gameVM.selectedComplexity = .Easy
+                    gameVM.selectedTypeOfGame = .PvP
+                }
+            case .errorSelectedType:
+                Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
+            case .none:
+                Button("") {}
+            }
+        }, message: { item in
+            item.message
+        })
+        .confirmationDialog("Do you want to activate AI?",
+                            isPresented: $gameVM.showingActiveAIDialog,
+                            titleVisibility: .visible, actions: {
+            Button("Easy", role: .destructive) {
+                gameVM.selectedComplexity = .Easy
+                gameVM.selectedTypeOfGame = .AI
+            }
+            Button("Hard", role: .destructive) {
+                gameVM.selectedComplexity = .Hard
+                gameVM.selectedTypeOfGame = .AI
+            }
+            Button("Hell", role: .destructive) {
+                gameVM.selectedComplexity = .HELL
+                gameVM.selectedTypeOfGame = .AI
+            }
+        }, message: {
+            Text("Select AI difficulty")
+        })
     }
 }
 

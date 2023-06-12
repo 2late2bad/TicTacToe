@@ -11,12 +11,10 @@ struct StartView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
     
-    @State private var selectedComplexity: Complexity = .Easy
-    @State private var selectedTypeOfGame: TypeGame = .PvP
     @State private var animationAmount = 1.0
     
     private var colorButton: Color { .red }
-    private var openAI: Bool { selectedTypeOfGame == .PvP }
+    private var openAI: Bool { gameVM.selectedTypeOfGame == .PvP }
     
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = .red
@@ -54,9 +52,10 @@ struct StartView: View {
                     
                     VStack {
                         Stepper("Rounds to win: \(gameVM.sumOfWins)", value: $gameVM.sumOfWins, in: 1...6)
+                            .font(.custom("Disket Mono", size: 15))
                             .padding([.leading, .trailing], 60)
                         
-                        Picker("Type game", selection: $selectedTypeOfGame) {
+                        Picker("Type game", selection: $gameVM.selectedTypeOfGame) {
                             ForEach(TypeGame.allCases) { type in
                                 Text(type.rawValue).tag(type)
                             }
@@ -65,15 +64,15 @@ struct StartView: View {
                         .padding([.leading, .trailing], 60)
                         .padding([.top], 10)
                         
-                        Picker("Complexity", selection: $selectedComplexity) {
+                        Picker("Complexity", selection: $gameVM.selectedComplexity) {
                             ForEach(Complexity.allCases) { complexity in
-                                Text(complexity.title).tag(complexity)
+                                Text(complexity.rawValue.capitalized).tag(complexity)
                             }
                         }
                         .pickerStyle(.segmented)
                         .padding([.leading, .trailing], 60)
                         .padding([.top], 8)
-                        .opacity(selectedTypeOfGame == .PvP ? 0 : 1)
+                        .opacity(gameVM.selectedTypeOfGame == .PvP ? 0 : 1)
                         .disabled(openAI)
                     }
                     Spacer()
