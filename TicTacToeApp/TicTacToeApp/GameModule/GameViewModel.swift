@@ -47,7 +47,7 @@ final class GameViewModel: ObservableObject {
             return
         }
         
-        if checkWinCondition(for: .zero, in: moves) {
+        if checkWinCondition(for: .zero, in: moves) && selectedTypeOfGame == .PvP {
             checkWinMatch(for: .zero)
             return
         }
@@ -59,23 +59,47 @@ final class GameViewModel: ObservableObject {
         
         isCrossTurn.toggle()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            isGameboardDisabled = false
+        switch selectedTypeOfGame {
+        case .PvP:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                isGameboardDisabled = false
+            }
+        case .AI:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
+                let computerPosition = ai.determineComputerMovePosition(in: moves, difficalty: selectedComplexity)
+                moves[computerPosition] = Move(player: isCrossTurn ? .cross : .zero, boardIndex: computerPosition)
+                
+                if checkWinCondition(for: .zero, in: moves) {
+                    checkWinMatch(for: .zero)
+                    return
+                }
+                
+                if checkForDraw(in: moves) {
+                    checkWinMatch(for: nil)
+                    return
+                }
+                
+                isCrossTurn.toggle()
+                isGameboardDisabled = false
+            }
         }
         
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { [self] in
-        //            /// integration AI
-        //            isGameboardDisabled = false
-        //            if checkWinCondition(for: .zero, in: moves) {
-        //                print("Нолик победил!")
-        //                return
-        //            }
-        //            if checkForDraw(in: moves) {
-        //                print("Ничья")
-        //                return
-        //            }
-        //        }
     }
+
+    // Рестарт игры
+    func restartGame() {
+        moves = Array(repeating: nil, count: 9)
+        winningCells = []
+        isCrossTurn = true
+        isGameboardDisabled = false
+        currentRound = 1
+        xWins = 0
+        oWins = sumOfWins
+    }
+    
+}
+
+private extension GameViewModel {
     
     // Проверка, занята ли ячейка
     func isCellNotEmpty(in moves: [Move?], for index: Int) -> Bool {
