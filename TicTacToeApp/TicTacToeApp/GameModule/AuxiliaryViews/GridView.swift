@@ -1,5 +1,5 @@
 //
-//  GridCustomView.swift
+//  GridView.swift
 //  TicTacToeApp
 //
 //  Created by Alexander Vagin on 16.03.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GridCustomView: View {
+struct GridView: View {
     
     @State private var actualFrame: (width: CGFloat, height: CGFloat) = (width: 0, height: 0)
     let frameGrid: (width: CGFloat, height: CGFloat)
@@ -66,6 +66,6 @@ struct GridCustomView: View {
 
 struct CustomGrid_Previews: PreviewProvider {
     static var previews: some View {
-        GridCustomView(frameGrid: (width: 370, height: 370), indentLines: 10, thickness: 2, opacity: 0.2)
+        GridView(frameGrid: (width: 370, height: 370), indentLines: 10, thickness: 2, opacity: 0.2)
     }
 }
