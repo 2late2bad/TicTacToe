@@ -10,11 +10,10 @@ import SwiftUI
 struct EmptyCellView: View {
     
     var proxy: GeometryProxy
-    var colorForInvisibility: Color
     
     var body: some View {
         Rectangle()
-            .fill(colorForInvisibility)
+            .fill(R.Colors.background)
             .frame(width: proxy.size.width/3 - 15,
                    height: proxy.size.width/3 - 15)
     }

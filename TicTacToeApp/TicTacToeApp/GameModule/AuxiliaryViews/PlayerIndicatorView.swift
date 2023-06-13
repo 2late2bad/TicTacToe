@@ -15,11 +15,11 @@ struct PlayerIndicatorView: View {
     var body: some View {
         switch move {
         case .cross:
-            CrossCustomView(anim: true, angleForce: 0.12)
+            CrossCustomView()
                 .frame(width: proxy.size.width/3 - 15,
                        height: proxy.size.width/3 - 15)
         case .zero:
-            CircleCustomView(lineWidth: 10)
+            CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthDesk)
                 .frame(width: proxy.size.width/3 - 15,
                        height: proxy.size.width/3 - 15)
         }

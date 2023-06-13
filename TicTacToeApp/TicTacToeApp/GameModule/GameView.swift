@@ -20,7 +20,7 @@ struct GameView: View {
                     gameVM.alertItem = AlertContext.stopGame
                     gameVM.showingAlert = true
                 } label: {
-                    Image(systemName: "xmark.circle")
+                    Image(systemName: R.Images.exitGameButton)
                         .imageScale(.large)
                         .foregroundColor(.gray)
                 }
@@ -28,7 +28,7 @@ struct GameView: View {
                 Button {
                     gameVM.muteSound.toggle()
                 } label: {
-                    Image(systemName: gameVM.muteSound ? "speaker.slash.fill" : "speaker")
+                    Image(systemName: gameVM.muteSound ? R.Images.muteOnButton : R.Images.muteOffButton)
                         .imageScale(.large)
                         .foregroundColor(gameVM.muteSound ? .red : .gray)
                 }
@@ -38,10 +38,11 @@ struct GameView: View {
             VStack {
                 
                 Text("ROUND \(gameVM.currentRound)")
-                    .font(Font.custom("Marske", size: 50))
+                    .font(R.Fonts.Marske(size: 50))
+                    .foregroundColor(R.Colors.text)
                 
                 Text("FIRST BLOOD")
-                    .font(Font.custom("Cyberpunk", size: 30))
+                    .font(R.Fonts.Cyberpunk(size: 30))
                     .foregroundColor(.brown)
                     .scaleEffect(gameVM.animationAmount)
                     .opacity(!gameVM.winningCells.isEmpty ? gameVM.animationAmount : 0)
@@ -49,15 +50,13 @@ struct GameView: View {
                     .padding(.bottom, 20)
                 
                 ZStack {
-                    GridView(frameGrid: (width: geometry.size.width, height: geometry.size.width),
-                             indentLines: 12,
-                             thickness: 2,
-                             opacity: 0.2)
+                    GridView(frameGrid: (width: geometry.size.width, height: geometry.size.width))
+                    
                     VStack {
                         LazyVGrid(columns: gameVM.columns, spacing: 17) {
                             ForEach(0..<9) { i in
                                 ZStack {
-                                    EmptyCellView(proxy: geometry, colorForInvisibility: .white)
+                                    EmptyCellView(proxy: geometry)
                                     
                                     if let move = gameVM.moves[i]?.player {
                                         PlayerIndicatorView(proxy: geometry, move: move)
@@ -85,11 +84,12 @@ struct GameView: View {
                 
                 HStack {
                     Text("TURN:")
-                        .font(Font.custom("Disket Mono", size: 20))
-                    CrossCustomView(width: 10, height: 2, degress: 45, anim: false, angleForce: 0.12)
+                        .font(R.Fonts.DisketMono(size: 20))
+                        .foregroundColor(R.Colors.text)
+                    CrossCustomView(width: 10, height: 2, degress: 45, anim: false)
                         .frame(width: 20, height: 20)
                         .opacity(gameVM.isCrossTurn ? 1 : 0.2)
-                    CircleCustomView(lineWidth: 2)
+                    CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthExtra)
                         .frame(width: 20, height: 20)
                         .opacity(gameVM.isCrossTurn ? 0.2 : 1)
                 }
@@ -99,7 +99,7 @@ struct GameView: View {
                 HStack {
                     HStack {
                         ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
-                            CrossCustomView(width: 12, height: 2, degress: 45, anim: false, angleForce: 0.14)
+                            CrossCustomView(width: 11, height: 2, degress: 45, anim: false)
                                 .frame(width: 20, height: 20)
                                 .opacity(i < gameVM.xWins ? 1 : 0.2)
                         }
@@ -107,7 +107,7 @@ struct GameView: View {
                     Spacer(minLength: 20)
                     HStack {
                         ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
-                            CircleCustomView(lineWidth: 2)
+                            CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthExtra)
                                 .frame(width: 20, height: 20)
                                 .opacity(i < gameVM.oWins ? 0.2 : 1)
                         }
@@ -116,7 +116,7 @@ struct GameView: View {
                 .padding([.leading, .trailing], 20)
                 
                 Text("AI: \(gameVM.selectedTypeOfGame == .PvP ? "Disabled" : gameVM.selectedComplexity.rawValue)")
-                    .font(Font.custom("Disket Mono", size: 10))
+                    .font(R.Fonts.DisketMono(size: 10))
                     .padding(.top, 20)
                     .foregroundColor(.gray)
                     .onTapGesture {

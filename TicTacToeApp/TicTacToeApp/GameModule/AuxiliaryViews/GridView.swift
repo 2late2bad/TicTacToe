@@ -15,7 +15,10 @@ struct GridView: View {
     let thickness: CGFloat
     let opacity: Double
     
-    init(frameGrid: (width: CGFloat, height: CGFloat), indentLines: CGFloat, thickness: CGFloat, opacity: Double) {
+    init(frameGrid: (width: CGFloat, height: CGFloat),
+         indentLines: CGFloat = R.Indicators.Grid.indentLines,
+         thickness: CGFloat = R.Indicators.Grid.thickness,
+         opacity: Double = R.Indicators.Grid.opacity) {
         self.frameGrid = frameGrid
         self.indentLines = indentLines
         self.thickness = thickness

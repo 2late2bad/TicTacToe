@@ -16,6 +16,7 @@
 		241FBE3F2A027BA2005F461C /* SYNNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 241FBE3A2A027BA2005F461C /* SYNNova-Regular.otf */; };
 		241FBE402A027BA2005F461C /* SYNNova-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 241FBE3B2A027BA2005F461C /* SYNNova-ExtraLight.otf */; };
 		241FBE422A027C62005F461C /* DisketMonoRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 241FBE412A027C62005F461C /* DisketMonoRegular.ttf */; };
+		245E134B2A37BD6200C4B58B /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E134A2A37BD6200C4B58B /* Resources.swift */; };
 		248999BA29C4DA2200DBE791 /* EmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999B929C4DA2200DBE791 /* EmptyCellView.swift */; };
 		248999BC29C4DB0100DBE791 /* PlayerIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999BB29C4DB0100DBE791 /* PlayerIndicatorView.swift */; };
 		24C299082A3395E000E2ED2C /* Marske.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C299072A3395E000E2ED2C /* Marske.ttf */; };
@@ -47,6 +48,7 @@
 		241FBE3A2A027BA2005F461C /* SYNNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SYNNova-Regular.otf"; sourceTree = "<group>"; };
 		241FBE3B2A027BA2005F461C /* SYNNova-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SYNNova-ExtraLight.otf"; sourceTree = "<group>"; };
 		241FBE412A027C62005F461C /* DisketMonoRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisketMonoRegular.ttf; sourceTree = "<group>"; };
+		245E134A2A37BD6200C4B58B /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		248999B929C4DA2200DBE791 /* EmptyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellView.swift; sourceTree = "<group>"; };
 		248999BB29C4DB0100DBE791 /* PlayerIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIndicatorView.swift; sourceTree = "<group>"; };
 		248999BD29C4EA1E00DBE791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		245E13492A37BD1C00C4B58B /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				245E134A2A37BD6200C4B58B /* Resources.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		248999BE29C4EA8900DBE791 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +204,7 @@
 		24DD6C7B2A375A6B0057CC86 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				245E13492A37BD1C00C4B58B /* Storage */,
 				24DD6C7C2A375AC50057CC86 /* ArtificialIntelligence.swift */,
 				24DD6C7E2A377FCC0057CC86 /* Alerts.swift */,
 			);
@@ -319,6 +330,7 @@
 				24F2F90B29C3955800B0D895 /* GameView.swift in Sources */,
 				24F2F91629C39CCD00B0D895 /* CrossCustomView.swift in Sources */,
 				241C59CB29C3873F00F744A1 /* TicTacToeAppApp.swift in Sources */,
+				245E134B2A37BD6200C4B58B /* Resources.swift in Sources */,
 				248999BA29C4DA2200DBE791 /* EmptyCellView.swift in Sources */,
 				24D9864F29CA118700F75393 /* StartModel.swift in Sources */,
 			);

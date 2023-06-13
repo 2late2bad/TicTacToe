@@ -10,36 +10,39 @@ import SwiftUI
 struct StartView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
-    
     @State private var animationAmount = 1.0
     
-    private var colorButton: Color { .red }
     private var openAI: Bool { gameVM.selectedTypeOfGame == .PvP }
     
     init() {
-        UISegmentedControl.appearance().selectedSegmentTintColor = .red
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([.font : UIFont.systemFont(ofSize: 18)], for: .highlighted)
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.element)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor(R.Colors.foreground)],
+                                                               for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.font : R.Fonts.enlargedFont(to: 18)],
+                                                               for: .highlighted)
     }
     
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.white, .white]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: R.Colors.gradient),
+                               startPoint: .top,
+                               endPoint: .bottom)
                 
                 VStack(spacing: 10) {
                     
                     Spacer(minLength: 140)
                     
-                    Text("TIC TAC TOE")
-                        .font(Font.custom("Marske", size: 40))
+                    Text(R.Strings.game)
+                        .font(R.Fonts.Marske(size: 40))
+                        .foregroundColor(R.Colors.text)
                     
                     Spacer(minLength: 90)
                     
-                    GoButtonView(color: colorButton)
+                    GoButtonView()
                         .overlay {
                             Circle()
-                                .stroke(colorButton)
+                                .stroke(R.Colors.element)
                                 .scaleEffect(animationAmount)
                                 .opacity(2 - animationAmount)
                                 .animation(.easeInOut(duration: 3).repeatForever(autoreverses: false), value: animationAmount)
@@ -51,11 +54,14 @@ struct StartView: View {
                     Spacer()
                     
                     VStack {
-                        Stepper("Rounds to win: \(gameVM.sumOfWins)", value: $gameVM.sumOfWins, in: 1...6)
-                            .font(.custom("Disket Mono", size: 15))
-                            .padding([.leading, .trailing], 60)
+                        Stepper("\(R.Strings.roundsToWin): \(gameVM.sumOfWins)",
+                                value: $gameVM.sumOfWins,
+                                in: R.Indicators.rangeOfRounds)
+                        .font(R.Fonts.DisketMono(size: 15))
+                        .padding([.leading, .trailing], 60)
+                        .foregroundColor(R.Colors.text)
                         
-                        Picker("Type game", selection: $gameVM.selectedTypeOfGame) {
+                        Picker(R.Strings.typeGamePicker, selection: $gameVM.selectedTypeOfGame) {
                             ForEach(TypeGame.allCases) { type in
                                 Text(type.rawValue).tag(type)
                             }
@@ -64,7 +70,7 @@ struct StartView: View {
                         .padding([.leading, .trailing], 60)
                         .padding([.top], 10)
                         
-                        Picker("Complexity", selection: $gameVM.selectedComplexity) {
+                        Picker(R.Strings.complexityPicker, selection: $gameVM.selectedComplexity) {
                             ForEach(Complexity.allCases) { complexity in
                                 Text(complexity.rawValue.capitalized).tag(complexity)
                             }
@@ -82,14 +88,14 @@ struct StartView: View {
                         Button {
                             //
                         } label: {
-                            Image(systemName: "questionmark.circle").foregroundColor(.gray)
+                            Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.subScreenButtons)
                         }
                     }
                     ToolbarItem(placement: .bottomBar) {
                         Button {
                             //
                         } label: {
-                            Image(systemName: "gearshape").foregroundColor(.gray)
+                            Image(systemName: R.Images.settingsScreenButton).foregroundColor(R.Colors.subScreenButtons)
                         }
                     }
                 }

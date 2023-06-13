@@ -15,7 +15,11 @@ struct CrossCustomView: View {
     let anim: Bool
     let angleForce: CGFloat
     
-    init(width: CGFloat = 0, height: CGFloat = 0, degress: Double = -45, anim: Bool, angleForce: CGFloat) {
+    init(width: CGFloat = 0,
+         height: CGFloat = 0,
+         degress: Double = -45,
+         anim: Bool = true,
+         angleForce: CGFloat = R.Indicators.Cross.angleForce) {
         self.width = width
         self.height = height
         self.degress = degress
