@@ -13,7 +13,8 @@ struct GoButtonView: View {
         NavigationLink {
             GameView()
         } label: {
-            Text(R.Strings.goButton)
+            Text("GO!")
+                .shadow(color: .black.opacity(0.7), radius: 8, x: 0, y: 0)
                 .padding(40)
                 .background(R.Colors.element)
                 .foregroundColor(R.Colors.foreground)

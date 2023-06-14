@@ -13,9 +13,10 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @Published var alertItem: AlertItem?
+    @Published var alertItem: AlertModel?
     @Published var isGameboardDisabled            = false
     @Published var moves: [Move?]                 = Array(repeating: nil, count: 9)
+    @Published var selectedComplexity: Complexity = .Easy
     @Published var selectedTypeOfGame: TypeGame   = .PvP {
         willSet {
             if newValue == .PvP {
@@ -25,7 +26,6 @@ final class GameViewModel: ObservableObject {
             }
         }
     }
-    @Published var selectedComplexity: Complexity = .Easy
     @Published var sumOfWins: Int = 1 {
         willSet {
             oWins = newValue
@@ -105,6 +105,17 @@ final class GameViewModel: ObservableObject {
         currentRound = 1
         xWins = 0
         oWins = sumOfWins
+    }
+    
+    // Анимация победной линии
+    func winLineAnimation(_ cell: Int) {
+        if winningCells.contains(cell) {
+            flashingColor = R.Colors.element
+            animationAmount = 1
+        } else {
+            flashingColor = R.Colors.indicators
+            animationAmount = 0.001
+        }
     }
     
 }

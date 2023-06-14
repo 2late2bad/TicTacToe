@@ -44,8 +44,8 @@ struct CrossCustomView: View {
         .onAppear {
             if anim {
                 withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
-                    width = 80
-                    height = 11
+                    width = R.Indicators.Cross.lenght
+                    height = R.Indicators.Cross.thickness
                     degress = 45
                 }
             }

@@ -55,7 +55,7 @@ struct GridView: View {
             .rotationEffect(Angle(degrees: 90))
         }
         .onAppear {
-            withAnimation(.easeInOut(duration: 0.8)) {
+            withAnimation(.easeInOut(duration: R.Indicators.Grid.animDuration)) {
                 actualFrame.width = frameGrid.width
                 actualFrame.height = frameGrid.height
             }

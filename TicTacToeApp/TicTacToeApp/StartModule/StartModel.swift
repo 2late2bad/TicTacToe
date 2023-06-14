@@ -19,11 +19,11 @@ enum Complexity: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .Easy:
-            return R.Strings.easyDifficalty
+            return R.Strings.easy
         case .Hard:
-            return R.Strings.hardDifficalty
+            return R.Strings.hard
         case .HELL:
-            return R.Strings.hellDifficalty
+            return R.Strings.hell
         }
     }
 }

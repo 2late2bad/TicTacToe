@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct TicTacToeAppApp: App {
     
-    @StateObject var gameVM = GameViewModel()
+    @StateObject var gameVM: GameViewModel = GameViewModel()
     
     var body: some Scene {
         WindowGroup {
