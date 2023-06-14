@@ -51,51 +51,18 @@ struct GameView: View {
         .alert(gameVM.alertItem?.title ?? Text(""),
                isPresented: $gameVM.showingAlert,
                presenting: gameVM.alertItem,
-               actions: { item in
-            switch gameVM.alertItem?.type {
-            case .stopGame:
-                Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
-                Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
-                    gameVM.restartGame()
-                    gameVM.selectedTypeOfGame = .PvP
-                    dismiss()
-                }
-            case .disableAI:
-                Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
-                Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
-                    gameVM.selectedTypeOfGame = .PvP
-                }
-            case .errorSelectedType:
-                Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
-            case .none:
-                Button("") {}
-            }
-        }, message: { item in
-            item.message
-        })
+               actions: { _ in AlertButtonsView() },
+               message: { item in item.message })
         .confirmationDialog("Do you want to activate AI?",
                             isPresented: $gameVM.showingActiveAIDialog,
-                            titleVisibility: .visible, actions: {
-            Button("Easy", role: .destructive) {
-                gameVM.selectedComplexity = .Easy
-                gameVM.selectedTypeOfGame = .AI
-            }
-            Button("Hard", role: .destructive) {
-                gameVM.selectedComplexity = .Hard
-                gameVM.selectedTypeOfGame = .AI
-            }
-            Button("Hell", role: .destructive) {
-                gameVM.selectedComplexity = .HELL
-                gameVM.selectedTypeOfGame = .AI
-            }
-        }, message: {
-            Text("Select AI difficulty")
-        })
+                            titleVisibility: .visible,
+                            actions: { AlertButtonsView() },
+                            message: { Text("Select AI difficulty") })
     }
 }
 
-struct GameView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView()
-    }
-}
+//struct GameView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GameView()
+//    }
+//}
