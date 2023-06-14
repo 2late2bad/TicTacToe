@@ -148,14 +148,12 @@ struct GameView: View {
                 Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
                 Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
                     gameVM.restartGame()
-                    gameVM.selectedComplexity = .Easy
                     gameVM.selectedTypeOfGame = .PvP
                     dismiss()
                 }
             case .disableAI:
                 Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
                 Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
-                    gameVM.selectedComplexity = .Easy
                     gameVM.selectedTypeOfGame = .PvP
                 }
             case .errorSelectedType:

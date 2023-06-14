@@ -16,7 +16,15 @@ final class GameViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var isGameboardDisabled            = false
     @Published var moves: [Move?]                 = Array(repeating: nil, count: 9)
-    @Published var selectedTypeOfGame: TypeGame   = .PvP
+    @Published var selectedTypeOfGame: TypeGame   = .PvP {
+        willSet {
+            if newValue == .PvP {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { [self] in
+                    selectedComplexity = .Easy
+                }
+            }
+        }
+    }
     @Published var selectedComplexity: Complexity = .Easy
     @Published var sumOfWins: Int = 1 {
         willSet {
