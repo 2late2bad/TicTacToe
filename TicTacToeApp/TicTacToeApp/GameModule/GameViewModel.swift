@@ -15,7 +15,13 @@ final class GameViewModel: ObservableObject {
     
     @Published var alertItem: AlertModel?
     @Published var isGameboardDisabled            = false
-    @Published var moves: [Move?]                 = Array(repeating: nil, count: 9)
+    @Published var moves: [Move?]                 = R.Indicators.resetMoves
+    @Published var flashingColor: Color           = R.Colors.indicators
+    @Published var gridOpacity: Double            = R.Indicators.Grid.opacity
+    @Published var muteSound: Bool                = false
+    @Published var showingSheet: Bool             = false
+    @Published var showingAlert: Bool             = false
+    @Published var showingActiveAIDialog: Bool    = false
     @Published var selectedComplexity: Complexity = .Easy
     @Published var selectedTypeOfGame: TypeGame   = .PvP {
         willSet {
@@ -31,20 +37,20 @@ final class GameViewModel: ObservableObject {
             oWins = newValue
         }
     }
-    
-    @Published var flashingColor: Color        = .black
-    @Published var animationAmount: Double     = 0.001
-    @Published var muteSound: Bool             = false
-    @Published var showingSheet: Bool          = false
-    @Published var showingAlert: Bool          = false
-    @Published var showingActiveAIDialog: Bool = false
-    
+
     let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence()
-    var isCrossTurn = true
-    var winningCells: [Int] = []
-    var currentRound: Int = 1
-    var xWins: Int = 0
-    var oWins: Int = 1
+    var isCrossTurn                   = true
+    var textOutcome: String           = "FIGHT!"
+    var showingOutcome: Bool          = false
+    var roundLabelRotation: Double    = 360
+    var indicatorCrossPosition        = R.Indicators.Cross.positionTurn
+    var indicatorZeroPosition         = R.Indicators.Circle.positionTurn
+    var indicatorCrossOpacity: Double = 0
+    var indicatorZeroOpacity: Double  = 0
+    var winningCells: [Int]           = []
+    var currentRound: Int             = 1
+    var xWins: Int                    = 0
+    var oWins: Int                    = 1
 
     // Ход игрока/AI
     func processPlayerMove(for position: Int) {
@@ -96,30 +102,30 @@ final class GameViewModel: ObservableObject {
         
     }
 
-    // Рестарт игры
-    func restartGame() {
-        moves = Array(repeating: nil, count: 9)
+    // Рестарт раунда (либо всего матча)
+    func restartRound(match: Bool) {
+        moves = R.Indicators.resetMoves
         winningCells = []
         isCrossTurn = true
         isGameboardDisabled = false
-        currentRound = 1
-        xWins = 0
-        oWins = sumOfWins
-    }
-    
-    // Анимация победной линии
-    func winLineAnimation(_ cell: Int) {
-        if winningCells.contains(cell) {
-            flashingColor = R.Colors.element
-            animationAmount = 1
+        if match {
+            indicatorCrossPosition = (x: 212, y: -68)
+            indicatorZeroPosition = (x: 240, y: -78)
+            currentRound = 1
+            xWins = 0
+            oWins = sumOfWins
         } else {
-            flashingColor = R.Colors.indicators
-            animationAmount = 0.001
+            reloadAnimation()
+            currentRound += 1
+            indicatorCrossOpacity = 0
+            indicatorZeroOpacity = 0
+            showingOutcome = false
         }
     }
-    
+
 }
 
+// MARK: - Private methods
 private extension GameViewModel {
     
     // Проверка, занята ли ячейка
@@ -145,45 +151,136 @@ private extension GameViewModel {
     func checkForDraw(in moves: [Move?]) -> Bool {
         moves.compactMap { $0 }.count == 9
     }
+
+    // Проверка на победу в матче
+    func checkWinMatch(for player: Player?) {
+        switch player {
+        case .cross:
+            winLineAnimation()
+            if (xWins + 1) == sumOfWins {
+                matchWinner(.cross)
+            } else {
+                winRateAnimation(.cross)
+                restartBoard(point: .cross)
+            }
+        case .zero:
+            winLineAnimation()
+            if (oWins - 1) == 0 {
+                matchWinner(.zero)
+            } else {
+                winRateAnimation(.zero)
+                restartBoard(point: .zero)
+            }
+        default:
+            drawAnimation()
+            restartBoard(point: nil)
+        }
+    }
     
-    // Рестарт раунда
+    // Обновление игрового поля для следующего раунда
     func restartBoard(point: Player?) {
+        switch point {
+        case .cross:
+            generationResultRound(xWins + 1)
+        case .zero:
+            generationResultRound(sumOfWins - oWins + 1)
+        case nil:
+            generationResultRound(10)
+        }
+        
+        showingOutcome = true
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            moves = Array(repeating: nil, count: 9)
-            winningCells = []
-            isCrossTurn = true
-            isGameboardDisabled = false
-            currentRound += 1
+            restartRound(match: false)
             if point != nil {
                 point == .cross ? (xWins += 1) : (oWins -= 1)
             }
         }
     }
     
-    // Проверка на победу в матче
-    func checkWinMatch(for player: Player?) {
-        switch player {
-        case .cross:
-            if (xWins + 1) == sumOfWins {
-                xWins += 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-                    showingSheet = true
-                }
-            } else {
-                restartBoard(point: .cross)
-            }
-        case .zero:
-            if (oWins - 1) == 0 {
-                oWins -= 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-                    showingSheet = true
-                }
-            } else {
-                restartBoard(point: .zero)
-            }
-        default:
-            restartBoard(point: nil)
+    // Определение победителя в матче
+    func matchWinner(_ player: Player) {
+        player == .cross ? (xWins += 1) : (oWins -= 1)
+        generationResultRound(0)
+        showingOutcome = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            showingOutcome = false
+            showingSheet = true
         }
     }
     
+    // Генерация текста результата раунда
+    func generationResultRound(_ count: Int) {
+        switch count {
+        case 0:
+            textOutcome = "WIN"
+        case 1:
+            textOutcome = "FIRST BLOOD"
+        case 2:
+            textOutcome = "DOUBLE KILL"
+        case 3:
+            textOutcome = "TRIPLE KILL"
+        case 4:
+            textOutcome = "DOMINATING"
+        case 5:
+            textOutcome = "RAMPAGE"
+        default:
+            textOutcome = "DRAW"
+        }
+    }
+}
+
+// MARK: - Animations
+private extension GameViewModel {
+
+    // Анимация добавления индикатора игрока в его пул побед
+    func winRateAnimation(_ player: Player) {
+        switch player {
+        case .cross:
+            indicatorCrossOpacity = 1
+            if xWins == 0 {
+                indicatorCrossPosition = (x: 10, y: -18)
+            } else {
+                indicatorCrossPosition.x += 28
+            }
+        case .zero:
+            indicatorZeroOpacity = 1
+            if (sumOfWins - oWins) == 0 {
+                indicatorZeroPosition = (x: 364, y: -28)
+            } else {
+                indicatorZeroPosition.x -= 28
+            }
+        }
+    }
+    
+    // Анимация элементов при смене раунда
+    func reloadAnimation() {
+        roundLabelRotation == 360 ? (roundLabelRotation) = 0 : (roundLabelRotation = 360)
+    }
+    
+    // Анимация победной линии
+    func winLineAnimation() {
+        let animation = Animation.linear(duration: 0.07).repeatCount(5, autoreverses: true)
+        withAnimation(animation.delay(0.3)) {
+            flashingColor = R.Colors.element
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.65) { [self] in
+            withAnimation(animation) {
+                flashingColor = R.Colors.indicators
+            }
+        }
+    }
+    
+    // Анимация доски в случае ничьи
+    func drawAnimation() {
+        let animation = Animation.easeInOut(duration: 0.08).repeatCount(5, autoreverses: true)
+        withAnimation(animation.delay(0.2)) {
+            gridOpacity = 1
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
+            withAnimation(animation) {
+                gridOpacity = R.Indicators.Grid.opacity
+            }
+        }
+    }
 }

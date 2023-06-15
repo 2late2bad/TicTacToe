@@ -23,6 +23,7 @@ enum Resources {
     
     enum Indicators {
         static let rangeOfRounds: ClosedRange = 1...6
+        static let resetMoves: [Move?]        = Array(repeating: nil, count: 9)
         
         enum Grid {
             static let indentLines: CGFloat  = 16
@@ -35,11 +36,13 @@ enum Resources {
             static let angleForce: CGFloat = 0.12
             static let lenght: CGFloat     = 82
             static let thickness: CGFloat  = 12
+            static let positionTurn: (x: CGFloat, y: CGFloat) = (x: 212, y: -68)
         }
         
         enum Circle {
             static let lineWidthDesk: CGFloat  = 11
             static let lineWidthExtra: CGFloat = 2
+            static let positionTurn: (x: CGFloat, y: CGFloat) = (x: 240, y: -78)
         }
     }
     
@@ -61,11 +64,10 @@ enum Resources {
     enum Colors {
         static let text: Color                 = Color.black
         static let indicators: Color           = Color.black
-        static let background: Color           = Color("background")
         static let element: Color              = Color.red
         static let foreground: Color           = Color.white
         static let subScreenButtons: Color     = Color.gray
+        static let background: Color           = Color("background")
         static let gradient: [Color]           = [.white, .white]
     }
-
 }

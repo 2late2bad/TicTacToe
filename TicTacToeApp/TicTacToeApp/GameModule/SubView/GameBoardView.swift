@@ -16,6 +16,7 @@ struct GameBoardView: View {
         ZStack {
             
             GridView(frameGrid: (width: geometry.size.width, height: geometry.size.width))
+                .opacity(gameVM.gridOpacity)
             
             VStack {
                 LazyVGrid(columns: gameVM.columns, spacing: 17) {
@@ -25,12 +26,8 @@ struct GameBoardView: View {
                             
                             if let move = gameVM.moves[cell]?.player {
                                 PlayerIndicatorView(proxy: geometry, move: move)
-                                    .foregroundColor(gameVM.winningCells.contains(cell) ? gameVM.flashingColor : R.Colors.indicators)
-                                    .animation(.linear(duration: 0.07).repeatCount(10).delay(0.3),
-                                               value: gameVM.flashingColor)
-                                    .onAppear {
-                                        gameVM.winLineAnimation(cell)
-                                    }
+                                    .foregroundColor(gameVM.winningCells.contains(cell) ?
+                                                     gameVM.flashingColor : R.Colors.indicators)
                             }
                         }
                         .onTapGesture {
@@ -41,13 +38,6 @@ struct GameBoardView: View {
             }
             .padding(3)
             .disabled(gameVM.isGameboardDisabled)
-            
         }
     }
 }
-
-//struct GameBoardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameBoardView()
-//    }
-//}

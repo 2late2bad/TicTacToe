@@ -14,7 +14,7 @@ struct WinnerView: View {
     var body: some View {
         Text("Winner: \(gameVM.isCrossTurn ? Player.cross.rawValue : Player.zero.rawValue)")
         Button {
-            gameVM.restartGame()
+            gameVM.restartRound(match: true)
             gameVM.showingSheet = false
         } label: {
             Text("back")

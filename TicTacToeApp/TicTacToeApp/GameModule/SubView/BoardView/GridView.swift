@@ -13,16 +13,13 @@ struct GridView: View {
     let frameGrid: (width: CGFloat, height: CGFloat)
     var indentLines: CGFloat
     let thickness: CGFloat
-    let opacity: Double
     
     init(frameGrid: (width: CGFloat, height: CGFloat),
          indentLines: CGFloat = R.Indicators.Grid.indentLines,
-         thickness: CGFloat = R.Indicators.Grid.thickness,
-         opacity: Double = R.Indicators.Grid.opacity) {
+         thickness: CGFloat = R.Indicators.Grid.thickness) {
         self.frameGrid = frameGrid
         self.indentLines = indentLines
         self.thickness = thickness
-        self.opacity = opacity
     }
     
     var body: some View {
@@ -31,11 +28,9 @@ struct GridView: View {
                 Spacer()
                 Rectangle()
                     .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
-                    .opacity(opacity)
                 Spacer()
                 Rectangle()
                     .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
-                    .opacity(opacity)
                 Spacer()
             }
             .frame(width: frameGrid.width, height: frameGrid.height)
@@ -44,11 +39,9 @@ struct GridView: View {
                 Spacer()
                 Rectangle()
                     .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
-                    .opacity(opacity)
                 Spacer()
                 Rectangle()
                     .frame(width: getFrameWidthNonNegative(actualFrame.width, indentLines), height: thickness)
-                    .opacity(opacity)
                 Spacer()
             }
             .frame(width: frameGrid.width, height: frameGrid.height)
@@ -69,6 +62,6 @@ struct GridView: View {
 
 struct CustomGrid_Previews: PreviewProvider {
     static var previews: some View {
-        GridView(frameGrid: (width: 370, height: 370), indentLines: 10, thickness: 2, opacity: 0.2)
+        GridView(frameGrid: (width: 370, height: 370), indentLines: 10, thickness: 2)
     }
 }
