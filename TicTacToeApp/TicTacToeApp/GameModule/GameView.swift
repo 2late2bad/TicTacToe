@@ -70,7 +70,7 @@ struct GameView: View {
                             message: { Text("Select AI difficulty") })
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                gameVM.restartRound(match: true)
+                gameVM.newRound(andMatch: true)
             }
         }
     }

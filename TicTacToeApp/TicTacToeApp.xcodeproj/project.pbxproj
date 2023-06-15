@@ -44,6 +44,7 @@
 		24F2F91629C39CCD00B0D895 /* CrossCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2F91529C39CCD00B0D895 /* CrossCustomView.swift */; };
 		24F2F91829C3A01800B0D895 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2F91729C3A01800B0D895 /* GridView.swift */; };
 		24F2F91A29C3AB6800B0D895 /* CircleCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2F91929C3AB6800B0D895 /* CircleCustomView.swift */; };
+		24F6842A2A3B939500AFEDCD /* ReactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F684292A3B939500AFEDCD /* ReactionService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		24F2F91529C39CCD00B0D895 /* CrossCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossCustomView.swift; sourceTree = "<group>"; };
 		24F2F91729C3A01800B0D895 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		24F2F91929C3AB6800B0D895 /* CircleCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCustomView.swift; sourceTree = "<group>"; };
+		24F684292A3B939500AFEDCD /* ReactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 			children = (
 				245E13492A37BD1C00C4B58B /* Storage */,
 				24DD6C7C2A375AC50057CC86 /* ArtificialIntelligence.swift */,
+				24F684292A3B939500AFEDCD /* ReactionService.swift */,
 				24DD6C7E2A377FCC0057CC86 /* AlertModel.swift */,
 			);
 			path = Services;
@@ -368,6 +371,7 @@
 				24A81E862A3A4363005FD85D /* AlertButtonsView.swift in Sources */,
 				24F2F90D29C3956300B0D895 /* GameViewModel.swift in Sources */,
 				24A81E7B2A3A3043005FD85D /* AIStatusView.swift in Sources */,
+				24F6842A2A3B939500AFEDCD /* ReactionService.swift in Sources */,
 				24A81E6F2A3A2697005FD85D /* DefinitionComplexityView.swift in Sources */,
 				248999BC29C4DB0100DBE791 /* PlayerIndicatorView.swift in Sources */,
 				24F2F91429C39C0700B0D895 /* RhombusShape.swift in Sources */,

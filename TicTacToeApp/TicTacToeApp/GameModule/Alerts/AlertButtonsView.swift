@@ -19,7 +19,7 @@ struct AlertButtonsView: View {
             case .stopGame:
                 Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
                 Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
-                    gameVM.restartRound(match: true)
+                    gameVM.newRound(andMatch: true)
                     gameVM.selectedTypeOfGame = .PvP
                     dismiss()
                 }
