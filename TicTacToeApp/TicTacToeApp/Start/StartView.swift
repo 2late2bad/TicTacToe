@@ -14,13 +14,16 @@ struct StartView: View {
     
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.element)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor(R.Colors.foreground)],
-                                                               for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [.foregroundColor : UIColor(R.Colors.foreground)], for: .selected)
     }
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .center) {
+                R.Colors.background
+                    .ignoresSafeArea()
+                
                 VStack(spacing: 10) {
                     Spacer()
                     Text("TIC TAC TOE")
@@ -45,10 +48,10 @@ struct StartView: View {
                         .offset(y: -30)
                     Spacer()
                 }
+                
                 DefinitionComplexityView(startVM: startVM)
                     .offset(y: 305)
             }
-            .background(R.Colors.background)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {

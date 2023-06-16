@@ -27,7 +27,7 @@ struct GameBoardView: View {
                             if let move = gameVM.moves[cell]?.player {
                                 PlayerIndicatorView(proxy: geometry, move: move)
                                     .foregroundColor(gameVM.winningCells.contains(cell) ?
-                                                     gameVM.flashingColor : R.Colors.indicators)
+                                                     gameVM.indicatorColor : R.Colors.indicatorDefault)
                             }
                         }
                         .onTapGesture {

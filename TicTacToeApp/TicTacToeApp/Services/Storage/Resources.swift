@@ -62,12 +62,13 @@ enum Resources {
     }
     
     enum Colors {
-        static let text: Color                 = Color.black
-        static let indicators: Color           = Color.black
-        static let element: Color              = Color.red
-        static let foreground: Color           = Color.white
+        static let text: Color                 = Color("Text")
+        static let element: Color              = Color("Element")
+        static let background: Color           = Color("Background")
+        static let indicatorDefault: Color     = Color("IndicatorDefault")
+        static let indicatorsFlashing: Color   = Color("IndicatorFlashing")
+        static let foreground: Color           = Color("Foreground")
         static let subScreenButtons: Color     = Color.gray
-        static let background: Color           = Color("background")
         static let gradient: [Color]           = [.white, .white]
     }
 }

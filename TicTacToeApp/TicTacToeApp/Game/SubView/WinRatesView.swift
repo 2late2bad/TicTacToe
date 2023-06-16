@@ -17,6 +17,7 @@ struct WinRatesView: View {
                 ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
                     CrossCustomView(width: 11, height: 2, degress: 45, anim: false)
                         .frame(width: 20, height: 20)
+                        .foregroundColor(R.Colors.indicatorDefault)
                         .opacity(i < gameVM.xWins ? 1 : 0.2)
                 }
             }
@@ -25,6 +26,7 @@ struct WinRatesView: View {
                 ForEach(0..<(gameVM.sumOfWins), id: \.self) { i in
                     CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthExtra)
                         .frame(width: 20, height: 20)
+                        .foregroundColor(R.Colors.indicatorDefault)
                         .opacity(i < gameVM.oWins ? 0.2 : 1)
                 }
             }
@@ -32,11 +34,13 @@ struct WinRatesView: View {
         // Indicators for animation
         CrossCustomView(width: 11, height: 2, degress: 45, anim: false)
             .frame(width: 20, height: 20)
+            .foregroundColor(R.Colors.indicatorDefault)
             .position(x: gameVM.indicatorCrossPosition.x, y: gameVM.indicatorCrossPosition.y)
             .opacity(gameVM.indicatorCrossOpacity)
             .animation(.linear, value: gameVM.indicatorCrossOpacity)
         CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthExtra)
             .frame(width: 20, height: 20)
+            .foregroundColor(R.Colors.indicatorDefault)
             .position(x: gameVM.indicatorZeroPosition.x, y: gameVM.indicatorZeroPosition.y)
             .opacity(gameVM.indicatorZeroOpacity)
             .animation(.linear, value: gameVM.indicatorZeroOpacity)

@@ -14,7 +14,7 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible())]
     
     @Published var moves: [Move?]                 = R.Indicators.resetMoves
-    @Published var flashingColor: Color           = R.Colors.indicators
+    @Published var indicatorColor: Color          = R.Colors.indicatorDefault
     @Published var gridOpacity: Double            = R.Indicators.Grid.opacity
     @Published var isGameboardDisabled            = false
     @Published var muteSound: Bool                = false
@@ -234,11 +234,11 @@ private extension GameViewModel {
     func winLineAnimation() {
         let animation = Animation.linear(duration: 0.07).repeatCount(5, autoreverses: true)
         withAnimation(animation.delay(0.3)) {
-            flashingColor = R.Colors.element
+            indicatorColor = R.Colors.indicatorsFlashing
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.65) { [self] in
             withAnimation(animation) {
-                flashingColor = R.Colors.indicators
+                indicatorColor = R.Colors.indicatorDefault
             }
         }
     }

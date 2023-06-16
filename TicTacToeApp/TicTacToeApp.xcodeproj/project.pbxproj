@@ -121,9 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				241C59CA29C3873F00F744A1 /* TicTacToeAppApp.swift */,
-				24D9864B29CA0BEE00F75393 /* StartModule */,
-				241C59D829C388E700F744A1 /* GameModule */,
-				24C299142A33C0BE00E2ED2C /* WinnerModule */,
+				24D9864B29CA0BEE00F75393 /* Start */,
+				241C59D829C388E700F744A1 /* Game */,
+				24C299142A33C0BE00E2ED2C /* Winner */,
 				24DD6C7B2A375A6B0057CC86 /* Services */,
 				24F2F91029C39A7900B0D895 /* Custom */,
 				248999BE29C4EA8900DBE791 /* SupportingFiles */,
@@ -140,7 +140,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		241C59D829C388E700F744A1 /* GameModule */ = {
+		241C59D829C388E700F744A1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				24DD6C7A2A3754290057CC86 /* SubView */,
@@ -149,7 +149,7 @@
 				24F2F90C29C3956300B0D895 /* GameViewModel.swift */,
 				24F2F90A29C3955800B0D895 /* GameView.swift */,
 			);
-			path = GameModule;
+			path = Game;
 			sourceTree = "<group>";
 		};
 		241FBE322A02785D005F461C /* Fonts */ = {
@@ -204,15 +204,15 @@
 			path = BoardView;
 			sourceTree = "<group>";
 		};
-		24C299142A33C0BE00E2ED2C /* WinnerModule */ = {
+		24C299142A33C0BE00E2ED2C /* Winner */ = {
 			isa = PBXGroup;
 			children = (
 				24C299112A339E6800E2ED2C /* WinnerView.swift */,
 			);
-			path = WinnerModule;
+			path = Winner;
 			sourceTree = "<group>";
 		};
-		24D9864B29CA0BEE00F75393 /* StartModule */ = {
+		24D9864B29CA0BEE00F75393 /* Start */ = {
 			isa = PBXGroup;
 			children = (
 				24D9865229CA5DB300F75393 /* SubView */,
@@ -220,7 +220,7 @@
 				24D9865029CA119200F75393 /* StartViewModel.swift */,
 				24D9864C29CA0C0100F75393 /* StartView.swift */,
 			);
-			path = StartModule;
+			path = Start;
 			sourceTree = "<group>";
 		};
 		24D9865229CA5DB300F75393 /* SubView */ = {

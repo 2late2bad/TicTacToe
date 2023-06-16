@@ -13,15 +13,18 @@ struct GameView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            HeadButtonsView()
-                .padding()
-            
             ZStack(alignment: .top) {
+                R.Colors.background
+                    .ignoresSafeArea()
+                
+                HeadButtonsView()
+                    .padding()
+                
                 VStack() {
                     if gameVM.showingOutcome {
                         Text(gameVM.textOutcome)
                             .font(R.Fonts.Cyberpunk(size: 30))
-                            .foregroundColor(.brown)
+                            .foregroundColor(R.Colors.indicatorsFlashing)
                             .transition(.scale)
                             .padding(.bottom, 20)
                     }
