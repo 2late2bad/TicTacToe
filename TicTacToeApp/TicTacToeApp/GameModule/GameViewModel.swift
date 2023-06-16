@@ -95,7 +95,7 @@ final class GameViewModel: ObservableObject {
         
     }
     
-    // Следующий раунд (либо рестарт матча)
+    // Старт следующего раунда (либо рестарт матча)
     func newRound(andMatch: Bool) {
         moves = R.Indicators.resetMoves
         winningCells = []
@@ -193,7 +193,7 @@ private extension GameViewModel {
     // Определение победителя в матче
     func matchWinner(_ player: Player) {
         player == .cross ? (xWins += 1) : (oWins -= 1)
-        textOutcome = reaction.roundResult(xPoint: xWins, oPoint: oWins, sumOfWins: sumOfWins)
+        textOutcome = reaction.matchResult(player: player, typeGame: selectedTypeOfGame)
         showingOutcome = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             showingOutcome = false
