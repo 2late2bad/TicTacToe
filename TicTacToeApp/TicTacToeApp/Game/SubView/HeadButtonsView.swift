@@ -19,7 +19,7 @@ struct HeadButtonsView: View {
             } label: {
                 Image(systemName: R.Images.exitGameButton)
                     .imageScale(.large)
-                    .foregroundColor(R.Colors.indicatorDefault.opacity(0.8))
+                    .foregroundColor(R.Colors.buttonSet)
             }
             Spacer()
             Button {
@@ -27,7 +27,7 @@ struct HeadButtonsView: View {
             } label: {
                 Image(systemName: gameVM.muteSound ? R.Images.muteOnButton : R.Images.muteOffButton)
                     .imageScale(.large)
-                    .foregroundColor(gameVM.muteSound ? R.Colors.indicatorsFlashing.opacity(0.8) : R.Colors.indicatorDefault.opacity(0.8))
+                    .foregroundColor(gameVM.muteSound ? R.Colors.indicatorsFlashing.opacity(0.8) : R.Colors.buttonSet)
             }
         }
     }

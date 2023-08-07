@@ -55,12 +55,15 @@ struct GameView: View {
                         .padding(.top, 5)
                 }
                 .padding(.top, 80)
+                
+                if gameVM.showingSheet {
+                    WinnerView()
+                        .zIndex(1)
+                        .transition(.scale.combined(with: .opacity).animation(Animation.spring(response: 0.3, dampingFraction: 0.7)))
+                }
             }
         }
         .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $gameVM.showingSheet) {
-            WinnerView()
-        }
         .alert(gameVM.alertItem?.title ?? Text(""),
                isPresented: $gameVM.showingAlert,
                presenting: gameVM.alertItem,

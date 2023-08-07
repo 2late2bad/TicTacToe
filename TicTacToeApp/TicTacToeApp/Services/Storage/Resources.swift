@@ -68,6 +68,7 @@ enum Resources {
         static let background: Color           = Color("Background")
         static let indicatorDefault: Color     = Color("IndicatorDefault")
         static let indicatorsFlashing: Color   = Color("IndicatorFlashing")
+        static let buttonSet: Color            = Color("ButtonSet")
         static let foreground: Color           = Color("Foreground")
         static let subScreenButtons: Color     = Color.gray
         static let gradient: [Color]           = [.white, .white]

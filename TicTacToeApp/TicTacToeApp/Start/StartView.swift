@@ -44,26 +44,26 @@ struct StartView: View {
                         }
                     Spacer()
                     GameDefinitionView(startVM: startVM)
-                        .offset(y: -30)
+                        .offset(y: -35)
                     Spacer()
                 }
                 
                 DefinitionComplexityView(startVM: startVM)
-                    .offset(y: 305)
+                    .offset(y: 300)
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         //
                     } label: {
-                        Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.indicatorDefault.opacity(0.8))
+                        Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.buttonSet)
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         //
                     } label: {
-                        Image(systemName: R.Images.settingsScreenButton).foregroundColor(R.Colors.indicatorDefault.opacity(0.8))
+                        Image(systemName: R.Images.settingsScreenButton).foregroundColor(R.Colors.buttonSet)
                     }
                 }
             }

@@ -197,7 +197,9 @@ private extension GameViewModel {
         showingOutcome = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             showingOutcome = false
-            showingSheet = true
+            withAnimation {
+                showingSheet = true
+            }
         }
     }
 }

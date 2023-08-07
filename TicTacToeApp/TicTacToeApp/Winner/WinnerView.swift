@@ -10,7 +10,9 @@ import SwiftUI
 struct WinnerView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
-    
+    @State private var animationDegrees: Double = 0
+    @State private var animationOpacity: Double = 0.3
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -34,22 +36,46 @@ struct WinnerView: View {
                                         angleForce: 0.12)
                         .frame(width: 210, height: 210)
                         .foregroundColor(R.Colors.indicatorDefault)
+                        .opacity(animationOpacity)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                                animationOpacity = 1
+                            }
+                        }
                         
                         Text("Match score: \(gameVM.xWins) - \(gameVM.sumOfWins - gameVM.oWins)")
                             .font(R.Fonts.Marske(size: 40))
                             .foregroundColor(R.Colors.text)
                             .padding([.bottom], 60)
                             .padding(.top, 10)
+                            .opacity(animationOpacity)
+                            .onAppear {
+                                withAnimation(.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                                    animationOpacity = 1
+                                }
+                            }
                     } else {
                         CircleCustomView(lineWidth: 16)
                             .frame(width: 210, height: 210)
                             .foregroundColor(R.Colors.indicatorDefault)
+                            .opacity(animationOpacity)
+                            .onAppear {
+                                withAnimation(.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                                    animationOpacity = 1
+                                }
+                            }
                         
                         Text("Match score: \(gameVM.sumOfWins - gameVM.oWins) - \(gameVM.xWins)")
                             .font(R.Fonts.Marske(size: 40))
                             .foregroundColor(R.Colors.text)
                             .padding([.bottom], 60)
                             .padding(.top, 10)
+                            .opacity(animationOpacity)
+                            .onAppear {
+                                withAnimation(.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                                    animationOpacity = 1
+                                }
+                            }
                     }
                     
                     Spacer()
@@ -60,6 +86,13 @@ struct WinnerView: View {
                         Image(systemName: "arrow.clockwise")
                             .imageScale(.large)
                             .foregroundColor(R.Colors.indicatorDefault)
+                            .rotationEffect(.degrees(animationDegrees))
+                            .shadow(color: R.Colors.indicatorDefault, radius: 3)
+                            .onAppear {
+                                withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
+                                    animationDegrees = 360
+                                }
+                            }
                     }
                     .padding([.bottom], 60)
                 }
@@ -68,9 +101,3 @@ struct WinnerView: View {
         }
     }
 }
-
-//struct WinnerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WinnerView()
-//    }
-//}
