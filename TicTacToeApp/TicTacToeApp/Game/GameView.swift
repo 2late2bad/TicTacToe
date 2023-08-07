@@ -10,7 +10,7 @@ import SwiftUI
 struct GameView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {

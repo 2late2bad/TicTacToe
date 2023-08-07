@@ -98,5 +98,4 @@ extension ReactionService: ReactionServiceProtocol {
         default: return ""
         }
     }
-
 }
