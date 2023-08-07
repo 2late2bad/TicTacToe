@@ -52,6 +52,7 @@ enum Resources {
         static let exitGameButton: String       = "xmark.circle"
         static let muteOnButton: String         = "speaker.slash.fill"
         static let muteOffButton: String        = "speaker"
+        static let backStartButton: String      = "arrow.down.backward"
     }
     
     enum Fonts {

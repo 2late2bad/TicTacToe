@@ -50,13 +50,21 @@ struct StartView: View {
                 
                 DefinitionComplexityView(startVM: startVM)
                     .offset(y: 300)
+                
+                if startVM.showInfo {
+                    InfoView()
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        //
+                        startVM.showInfo.toggle()
                     } label: {
-                        Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.buttonSet)
+                        if startVM.showInfo {
+                            Image(systemName: R.Images.backStartButton).foregroundColor(R.Colors.buttonSet)
+                        } else {
+                            Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.buttonSet)
+                        }
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {

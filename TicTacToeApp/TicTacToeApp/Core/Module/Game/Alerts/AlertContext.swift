@@ -24,5 +24,4 @@ struct AlertContext {
     static let errorType = AlertModel(type: .errorSelectedType,
                                      title: Text("You can change the type of game at the turn of the cross"),
                                      buttonTitle1: "OK")
-    
 }

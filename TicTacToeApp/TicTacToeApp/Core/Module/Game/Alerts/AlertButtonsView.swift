@@ -47,6 +47,5 @@ struct AlertButtonsView: View {
                 gameVM.selectedTypeOfGame = .AI
             }
         }
-        
     }
 }

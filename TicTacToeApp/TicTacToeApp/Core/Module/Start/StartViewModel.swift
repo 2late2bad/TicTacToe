@@ -9,6 +9,8 @@ import SwiftUI
 
 final class StartViewModel: ObservableObject {
     
+    @Published var showInfo: Bool = false
+    
     @Published var animationAmount: Double = 1.0
     @Published var showComplexity: Bool = false
     @Published var fontIncreaseAnimation: CGFloat = 14

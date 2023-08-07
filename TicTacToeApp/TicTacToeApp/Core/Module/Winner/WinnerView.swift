@@ -87,7 +87,7 @@ struct WinnerView: View {
                             .imageScale(.large)
                             .foregroundColor(R.Colors.indicatorDefault)
                             .rotationEffect(.degrees(animationDegrees))
-                            .shadow(color: R.Colors.indicatorDefault, radius: 3)
+                            .shadow(color: R.Colors.indicatorDefault, radius: 2)
                             .onAppear {
                                 withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
                                     animationDegrees = 360
