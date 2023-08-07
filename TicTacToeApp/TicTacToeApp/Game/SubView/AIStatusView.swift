@@ -15,7 +15,7 @@ struct AIStatusView: View {
         Text("AI: \(gameVM.selectedTypeOfGame == .PvP ? "Disabled" : gameVM.selectedComplexity.rawValue)")
             .font(R.Fonts.DisketMono(size: 10))
             .padding(.top, 20)
-            .foregroundColor(.gray)
+            .foregroundColor(R.Colors.text.opacity(0.8))
             .onTapGesture {
                 if gameVM.isCrossTurn {
                     if gameVM.selectedTypeOfGame == .AI {

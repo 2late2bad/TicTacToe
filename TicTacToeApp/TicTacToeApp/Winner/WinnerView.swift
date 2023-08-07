@@ -21,7 +21,7 @@ struct WinnerView: View {
                     Spacer()
                     Text("Winner")
                         .font(R.Fonts.Cyberpunk(size: 60))
-                        .foregroundColor(R.Colors.element)
+                        .foregroundColor(R.Colors.indicatorsFlashing)
                         .transition(.scale)
                         .padding(.bottom, 20)
                     

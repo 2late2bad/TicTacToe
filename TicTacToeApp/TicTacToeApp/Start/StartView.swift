@@ -13,7 +13,7 @@ struct StartView: View {
     @EnvironmentObject var gameVM: GameViewModel
     
     init() {
-        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.element)
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.useElement)
         UISegmentedControl.appearance().setTitleTextAttributes(
             [.foregroundColor : UIColor(R.Colors.foreground)], for: .selected)
     }
@@ -29,12 +29,11 @@ struct StartView: View {
                     Text("TIC TAC TOE")
                         .font(R.Fonts.Marske(size: 52))
                         .foregroundColor(R.Colors.text)
-                    //.shadow(color: .red.opacity(0.7), radius: 8, x: 0, y: 0)
                     Spacer()
                     GoButtonView()
                         .overlay {
                             Circle()
-                                .stroke(R.Colors.element)
+                                .stroke(R.Colors.useElement)
                                 .scaleEffect(startVM.animationAmount)
                                 .opacity(2 - startVM.animationAmount)
                                 .animation(.easeInOut(duration: 3).repeatForever(autoreverses: false),
@@ -57,14 +56,14 @@ struct StartView: View {
                     Button {
                         //
                     } label: {
-                        Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.subScreenButtons)
+                        Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.indicatorDefault.opacity(0.8))
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         //
                     } label: {
-                        Image(systemName: R.Images.settingsScreenButton).foregroundColor(R.Colors.subScreenButtons)
+                        Image(systemName: R.Images.settingsScreenButton).foregroundColor(R.Colors.indicatorDefault.opacity(0.8))
                     }
                 }
             }

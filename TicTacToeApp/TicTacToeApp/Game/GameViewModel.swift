@@ -232,15 +232,18 @@ private extension GameViewModel {
     
     // Анимация победной линии
     func winLineAnimation() {
-        let animation = Animation.linear(duration: 0.07).repeatCount(5, autoreverses: true)
+        let animation = Animation.easeIn(duration: 0.07).repeatCount(5, autoreverses: true)
         withAnimation(animation.delay(0.3)) {
             indicatorColor = R.Colors.indicatorsFlashing
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.65) { [self] in
-            withAnimation(animation) {
-                indicatorColor = R.Colors.indicatorDefault
-            }
+        withAnimation(animation.delay(0.65)) {
+            indicatorColor = R.Colors.indicatorDefault
         }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.65) { [self] in
+//            withAnimation(animation) {
+//                indicatorColor = R.Colors.indicatorDefault
+//            }
+//        }
     }
     
     // Анимация доски в случае ничьи

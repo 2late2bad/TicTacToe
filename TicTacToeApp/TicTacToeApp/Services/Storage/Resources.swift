@@ -63,6 +63,7 @@ enum Resources {
     
     enum Colors {
         static let text: Color                 = Color("Text")
+        static let useElement: Color           = Color("UseElement")
         static let element: Color              = Color("Element")
         static let background: Color           = Color("Background")
         static let indicatorDefault: Color     = Color("IndicatorDefault")
