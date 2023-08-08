@@ -39,7 +39,7 @@ struct GameDefinitionView: View {
             .onChange(of: gameVM.selectedTypeOfGame) { type in
                 startVM.gameTypeChange(type)
             }
-            .padding(.top, 10)
+            .padding(.top, 6)
                         
             DefinitionComplexityView(startVM: startVM)
         }

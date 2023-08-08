@@ -28,8 +28,4 @@ struct TurnView: View {
     }
 }
 
-//struct TurnView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TurnView()
-//    }
-//}
+

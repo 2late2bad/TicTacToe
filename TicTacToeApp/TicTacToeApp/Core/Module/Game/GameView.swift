@@ -13,48 +13,52 @@ struct GameView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .top) {
+            ZStack(alignment: .center) {
                 R.Colors.background
                     .ignoresSafeArea()
                 
-                HeadButtonsView()
-                    .padding()
-                
-                VStack() {
-                    if gameVM.showingOutcome {
-                        Text(gameVM.textOutcome)
-                            .font(R.Fonts.Cyberpunk(size: 30))
-                            .foregroundColor(R.Colors.indicatorsFlashing)
-                            .transition(.scale)
-                            .padding(.bottom, 20)
+                VStack(alignment: .center) {
+                    HeadButtonsView()
+                        .padding(.horizontal)
+                        .padding(.bottom, 8)
+                    
+                    VStack(spacing: 0) {
+                        Text("ROUND \(gameVM.currentRound)")
+                            .font(R.Fonts.Marske(size: 50))
+                            .lineLimit(1)
+                            .foregroundColor(R.Colors.text)
+                            .rotation3DEffect(.degrees(gameVM.roundLabelRotation), axis: (x: 1, y: 0, z: 0))
+                            .animation(.spring(dampingFraction: 0.7), value: gameVM.roundLabelRotation)
+
+                        VStack(spacing: 0) {
+                            if gameVM.showingOutcome {
+                                Text(gameVM.textOutcome)
+                                    .font(R.Fonts.Cyberpunk(size: 30))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.9)
+                                    .foregroundColor(R.Colors.indicatorsFlashing)
+                                    .transition(.scale)
+                            }
+                        }
+                        .frame(height: 40)
+                        .animation(.easeInOut(duration: 0.3),
+                                   value: gameVM.showingOutcome)
                     }
-                }
-                .offset(y: 130)
-                .padding(.bottom, 20)
-                .animation(.easeInOut(duration: 0.3),
-                           value: gameVM.showingOutcome)
-                
-                VStack {
-                    Text("ROUND \(gameVM.currentRound)")
-                        .font(R.Fonts.Marske(size: 50))
-                        .foregroundColor(R.Colors.text)
-                        .rotation3DEffect(.degrees(gameVM.roundLabelRotation), axis: (x: 1, y: 0, z: 0))
-                        .animation(.spring(dampingFraction: 0.7), value: gameVM.roundLabelRotation)
+                    .padding(.bottom, 10)
                     
                     GameBoardView(geometry: geometry)
-                        .padding(.top, 40)
                     
-                    TurnView()
-                        .padding(.top, 60)
-                        .padding(.bottom, 20)
-                    
-                    WinRatesView()
-                        .padding([.leading, .trailing], 20)
+                    Spacer()
+                    VStack(spacing: 10) {
+                        TurnView()
+                        WinRatesView()
+                            .padding(.horizontal)
+                    }
+                    Spacer()
                     
                     AIStatusView()
-                        .padding(.top, 5)
                 }
-                .padding(.top, 80)
+                .scenePadding([.top, .bottom])
                 
                 if gameVM.showingSheet {
                     WinnerView()

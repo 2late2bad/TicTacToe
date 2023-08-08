@@ -14,7 +14,6 @@ struct AIStatusView: View {
     var body: some View {
         Text("AI: \(gameVM.selectedTypeOfGame == .PvP ? "Disabled" : gameVM.selectedComplexity.rawValue)")
             .font(R.Fonts.DisketMono(size: 10))
-            .padding(.top, 20)
             .foregroundColor(R.Colors.text.opacity(0.8))
             .onTapGesture {
                 if gameVM.isCrossTurn {
@@ -32,8 +31,3 @@ struct AIStatusView: View {
     }
 }
 
-//struct AIStatusView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AIStatusView()
-//    }
-//}

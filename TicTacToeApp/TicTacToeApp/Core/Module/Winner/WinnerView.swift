@@ -95,7 +95,7 @@ struct WinnerView: View {
                                 }
                             }
                     }
-                    .padding([.bottom], 60)
+                    Spacer()
                 }
             }
 

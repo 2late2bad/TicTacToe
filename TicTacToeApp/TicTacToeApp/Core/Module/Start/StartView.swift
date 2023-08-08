@@ -24,7 +24,8 @@ struct StartView: View {
                 R.Colors.background
                     .ignoresSafeArea()
                 
-                VStack(spacing: 80) {
+                VStack(spacing: 0) {
+                    Spacer()
                     Text("game_name".localized)
                         .font(R.Fonts.Marske(size: 50))
                         .lineLimit(1)
@@ -32,7 +33,7 @@ struct StartView: View {
                         .foregroundColor(R.Colors.text)
                         .padding(.vertical, 40)
                         .padding(.horizontal, 20)
-                    
+                    Spacer()
                     GoButtonView()
                         .overlay {
                             Circle()
@@ -46,10 +47,11 @@ struct StartView: View {
                             startVM.goButtonAnimation(amount: 2)
                         }
                         .padding(.bottom, 20)
-                    
+                    Spacer()
                     GameDefinitionView(startVM: startVM)
                         .padding(.horizontal, 40)
                         .padding(.vertical, 20)
+                    Spacer()
                 }
                 
                 if startVM.showInfo {
