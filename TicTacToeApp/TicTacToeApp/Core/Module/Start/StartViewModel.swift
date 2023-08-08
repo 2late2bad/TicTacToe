@@ -22,10 +22,10 @@ final class StartViewModel: ObservableObject {
     
     public func fontAnimation(duration: Double) {
         withAnimation(.easeOut(duration: duration)) {
-            fontIncreaseAnimation = 17
+            fontIncreaseAnimation = 20
         }
         withAnimation(.easeIn(duration: duration).delay(duration)) {
-            fontIncreaseAnimation = 14
+            fontIncreaseAnimation = 16
         }
     }
     

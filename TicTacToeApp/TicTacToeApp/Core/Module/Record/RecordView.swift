@@ -35,7 +35,7 @@ struct RecordView: View {
                 .scrollIndicators(.hidden)
                 .scenePadding([.top, .bottom])
             }
-            .navigationTitle("Records")
+            .navigationTitle("records".localized)
             .navigationBarTitleDisplayMode(.inline)
         }
     }

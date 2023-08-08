@@ -15,27 +15,20 @@ struct DefinitionComplexityView: View {
     var body: some View {
         VStack {
             if startVM.showComplexity {
-                Text("Difficulty level")
-                    .font(R.Fonts.DisketMono(size: 11))
+                Text("difficalty_level".localized)
+                    .font(R.Fonts.DisketMono(size: 14))
                     .transition(.move(edge: .top).combined(with: .opacity))
-                    .padding(.bottom, 5)
                 Picker(R.Strings.complexityPicker, selection: $gameVM.selectedComplexity) {
                     ForEach(Complexity.allCases) { complexity in
-                        Text(complexity.rawValue.capitalized).tag(complexity)
+                        Text(complexity.title.capitalized).tag(complexity)
                     }
                 }
                 .pickerStyle(.segmented)
-                .padding([.leading, .trailing], 60)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
+        .frame(height: 60)
         .animation(.easeInOut(duration: 0.3),
                    value: startVM.showComplexity)
     }
 }
-
-//struct DefinitionComplexityView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DefinitionComplexityView()
-//    }
-//}

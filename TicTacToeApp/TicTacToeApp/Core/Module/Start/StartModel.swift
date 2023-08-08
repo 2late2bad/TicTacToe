@@ -35,4 +35,13 @@ enum TypeGame: String, CaseIterable, Identifiable, Codable {
     var id: Self {
         self
     }
+    
+    var title: String {
+        switch self {
+        case .PvP:
+            return R.Strings.pvpType
+        case .AI:
+            return R.Strings.aiType
+        }
+    }
 }

@@ -18,6 +18,8 @@
 		241FBE422A027C62005F461C /* DisketMonoRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 241FBE412A027C62005F461C /* DisketMonoRegular.ttf */; };
 		245073782A8257FD0074416D /* WinnerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245073772A8257FD0074416D /* WinnerViewModel.swift */; };
 		2450737B2A8258490074416D /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2450737A2A8258490074416D /* StorageService.swift */; };
+		245073812A826F730074416D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245073832A826F730074416D /* Localizable.strings */; };
+		245073862A8270400074416D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245073852A8270400074416D /* String+Ext.swift */; };
 		245E134B2A37BD6200C4B58B /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E134A2A37BD6200C4B58B /* Resources.swift */; };
 		248999BA29C4DA2200DBE791 /* EmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999B929C4DA2200DBE791 /* EmptyCellView.swift */; };
 		248999BC29C4DB0100DBE791 /* PlayerIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248999BB29C4DB0100DBE791 /* PlayerIndicatorView.swift */; };
@@ -68,6 +70,9 @@
 		241FBE412A027C62005F461C /* DisketMonoRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisketMonoRegular.ttf; sourceTree = "<group>"; };
 		245073772A8257FD0074416D /* WinnerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerViewModel.swift; sourceTree = "<group>"; };
 		2450737A2A8258490074416D /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		245073822A826F730074416D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		245073842A826F770074416D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		245073852A8270400074416D /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		245E134A2A37BD6200C4B58B /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		248999B929C4DA2200DBE791 /* EmptyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellView.swift; sourceTree = "<group>"; };
 		248999BB29C4DB0100DBE791 /* PlayerIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIndicatorView.swift; sourceTree = "<group>"; };
@@ -138,8 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				24CAFECA2A815A860079D947 /* Core */,
-				24F2F91029C39A7900B0D895 /* Custom */,
+				24DD6C7B2A375A6B0057CC86 /* Services */,
 				24CAFED72A81C2E50079D947 /* Extension */,
+				2450737C2A826F0C0074416D /* Localize */,
 				248999BE29C4EA8900DBE791 /* SupportingFiles */,
 				241C59D029C3874000F744A1 /* Preview Content */,
 			);
@@ -189,6 +195,14 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		2450737C2A826F0C0074416D /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				245073832A826F730074416D /* Localizable.strings */,
+			);
+			path = Localize;
+			sourceTree = "<group>";
+		};
 		248999BE29C4EA8900DBE791 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				24CAFECB2A815A910079D947 /* Module */,
-				24DD6C7B2A375A6B0057CC86 /* Services */,
+				24F2F91029C39A7900B0D895 /* Custom */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -296,6 +310,7 @@
 		24CAFED72A81C2E50079D947 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				245073852A8270400074416D /* String+Ext.swift */,
 				24CAFED82A81C2F40079D947 /* Date+Ext.swift */,
 			);
 			path = Extension;
@@ -412,7 +427,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				ru,
 			);
 			mainGroup = 241C59BE29C3873F00F744A1;
 			productRefGroup = 241C59C829C3873F00F744A1 /* Products */;
@@ -431,6 +446,7 @@
 			files = (
 				241FBE422A027C62005F461C /* DisketMonoRegular.ttf in Resources */,
 				24C299082A3395E000E2ED2C /* Marske.ttf in Resources */,
+				245073812A826F730074416D /* Localizable.strings in Resources */,
 				241FBE362A027871005F461C /* Cyberpunk.ttf in Resources */,
 				241FBE402A027BA2005F461C /* SYNNova-ExtraLight.otf in Resources */,
 				241C59D229C3874000F744A1 /* Preview Assets.xcassets in Resources */,
@@ -471,6 +487,7 @@
 				24CAFED62A81A5B70079D947 /* RecordCellView.swift in Sources */,
 				24D9865129CA119200F75393 /* StartViewModel.swift in Sources */,
 				24C299122A339E6800E2ED2C /* WinnerView.swift in Sources */,
+				245073862A8270400074416D /* String+Ext.swift in Sources */,
 				24CAFEDB2A81C8280079D947 /* RecordModel.swift in Sources */,
 				24DD6C7F2A377FCC0057CC86 /* AlertModel.swift in Sources */,
 				24F2F91829C3A01800B0D895 /* GridView.swift in Sources */,
@@ -489,6 +506,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		245073832A826F730074416D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				245073822A826F730074416D /* en */,
+				245073842A826F770074416D /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		241C59D329C3874000F744A1 /* Debug */ = {
@@ -618,6 +647,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TicTacToeApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -649,6 +679,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TicTacToeApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

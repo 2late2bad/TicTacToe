@@ -14,11 +14,12 @@ struct GameDefinitionView: View {
     
     var body: some View {
         VStack {
-            
             HStack {
-                Text("Rounds to win:")
-                    .font(R.Fonts.DisketMono(size: 14))
+                Text("round_of_wins".localized)
+                    .font(R.Fonts.DisketMono(size: 18))
+                    .minimumScaleFactor(0.7)
                     .foregroundColor(R.Colors.text)
+                    .lineLimit(1)
                 Stepper("\(gameVM.sumOfWins)",
                         value: $gameVM.sumOfWins,
                         in: R.Indicators.rangeOfRounds)
@@ -28,26 +29,19 @@ struct GameDefinitionView: View {
                     startVM.fontAnimation(duration: 0.2)
                 }
             }
-            .padding([.leading, .trailing], 60)
             
             Picker(R.Strings.typeGamePicker, selection: $gameVM.selectedTypeOfGame) {
                 ForEach(TypeGame.allCases) { type in
-                    Text(type.rawValue).tag(type)
+                    Text(type.title).tag(type)
                 }
             }
             .pickerStyle(.segmented)
-            .padding([.leading, .trailing], 60)
-            .padding([.top], 15)
             .onChange(of: gameVM.selectedTypeOfGame) { type in
                 startVM.gameTypeChange(type)
             }
-            
+            .padding(.top, 10)
+                        
+            DefinitionComplexityView(startVM: startVM)
         }
     }
 }
-
-//struct GameDefinitionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameDefinitionView()
-//    }
-//}

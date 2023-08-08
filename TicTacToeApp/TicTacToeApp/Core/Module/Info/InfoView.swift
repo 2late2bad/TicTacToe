@@ -16,19 +16,19 @@ struct InfoView: View {
             
             VStack(spacing: 40) {
                 VStack(spacing: 4) {
-                    Text("Created by #2late2bad")
+                    Text("created_by".localized + " \(R.Strings.creator)")
                         .font(R.Fonts.DisketMono(size: 22))
                         .foregroundColor(R.Colors.text)
-                    Text("All rights reserved")
+                    Text("all_right_reserved".localized)
                         .font(R.Fonts.DisketMono(size: 18))
                         .foregroundColor(R.Colors.buttonSet)
                 }
                 
                 VStack(spacing: 2) {
-                    Text("Version 0.8")
+                    Text("version".localized + " \(R.Strings.version)")
                         .font(R.Fonts.DisketMono(size: 16))
                         .foregroundColor(R.Colors.text)
-                    Text("Updated 08/2023")
+                    Text("updated".localized + " \(R.Strings.updated)")
                         .font(R.Fonts.DisketMono(size: 16))
                         .foregroundColor(R.Colors.buttonSet)
                 }

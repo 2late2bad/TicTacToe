@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  TicTacToeApp
+
+  Created by Alexander Vagin on 08.08.2023.
+  
+*/
+
+// MARK: - Start screen
+"game_name" = "TIC TAC TOE";
+"go_button" = "GO!";
+"round_of_wins" = "Rounds to win:";
+"difficalty_level" = "Difficulty level";
+"easy_comp" = "Easy";
+"hard_comp" = "Hard";
+"hell_comp" = "Hell";
+"pvp_type" = "PvP";
+"ai_type" = "AI";
+
+// MARK: - Info screen
+"created_by" = "Created by";
+"all_right_reserved" = "All rights reserved";
+"version" = "Version";
+"updated" = "Updated";
+
+// MARK: - Record screen
+"records" = "Records";

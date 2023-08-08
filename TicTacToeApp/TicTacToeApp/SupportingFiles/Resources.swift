@@ -13,9 +13,16 @@ typealias R = Resources
 enum Resources {
     
     enum Strings {
-        static let easy = "🤡 Easy"
-        static let hard = "👺 Hard"
-        static let hell = "🗿 HELL"
+        static let creator = "#2late2bad"
+        static let version = "0.8"
+        static let updated = "08/2023"
+
+        static let easy = "easy_comp".localized
+        static let hard = "hard_comp".localized
+        static let hell = "hell_comp".localized
+        
+        static let pvpType = "pvp_type".localized
+        static let aiType = "ai_type".localized
         
         static let typeGamePicker   = "Type game"
         static let complexityPicker = "Complexity"

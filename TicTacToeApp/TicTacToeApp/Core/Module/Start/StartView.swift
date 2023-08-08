@@ -24,12 +24,15 @@ struct StartView: View {
                 R.Colors.background
                     .ignoresSafeArea()
                 
-                VStack(spacing: 10) {
-                    Spacer()
-                    Text("TIC TAC TOE")
-                        .font(R.Fonts.Marske(size: 52))
+                VStack(spacing: 80) {
+                    Text("game_name".localized)
+                        .font(R.Fonts.Marske(size: 50))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                         .foregroundColor(R.Colors.text)
-                    Spacer()
+                        .padding(.vertical, 40)
+                        .padding(.horizontal, 20)
+                    
                     GoButtonView()
                         .overlay {
                             Circle()
@@ -42,14 +45,12 @@ struct StartView: View {
                         .onAppear {
                             startVM.goButtonAnimation(amount: 2)
                         }
-                    Spacer()
+                        .padding(.bottom, 20)
+                    
                     GameDefinitionView(startVM: startVM)
-                        .offset(y: -35)
-                    Spacer()
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 20)
                 }
-                
-                DefinitionComplexityView(startVM: startVM)
-                    .offset(y: 300)
                 
                 if startVM.showInfo {
                     InfoView()

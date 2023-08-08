@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  TicTacToeApp
+
+  Created by Alexander Vagin on 08.08.2023.
+  
+*/
+
+// MARK: - Start screen
+"game_name" = "КРЕСТИКИ НОЛИКИ";
+"go_button" = "GO!";
+"round_of_wins" = "Побед для матча:";
+"difficalty_level" = "Уровень сложности";
+"easy_comp" = "Легкий";
+"hard_comp" = "Тяжелый";
+"hell_comp" = "Кошмар";
+"pvp_type" = "2 игрока";
+"ai_type" = "Против ИИ";
+
+// MARK: - Info screen
+"created_by" = "Создано";
+"all_right_reserved" = "Все права защищены";
+"version" = "Версия";
+"updated" = "Обновлено";
+
+// MARK: - Record screen
+"records" = "Матчи";
