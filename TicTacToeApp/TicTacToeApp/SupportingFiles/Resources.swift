@@ -48,11 +48,12 @@ enum Resources {
     
     enum Images {
         static let infoScreenButton: String     = "questionmark.circle"
-        static let settingsScreenButton: String = "gearshape"
+        static let recordsScreenButton: String  = "flag.filled.and.flag.crossed"
         static let exitGameButton: String       = "xmark.circle"
         static let muteOnButton: String         = "speaker.slash.fill"
         static let muteOffButton: String        = "speaker"
-        static let backStartButton: String      = "arrow.down.backward"
+        static let backStartButtonLeft: String  = "arrow.down.backward"
+        static let backStartButtonRight: String = "arrow.down.forward"
     }
     
     enum Fonts {
@@ -71,7 +72,9 @@ enum Resources {
         static let indicatorsFlashing: Color   = Color("IndicatorFlashing")
         static let buttonSet: Color            = Color("ButtonSet")
         static let foreground: Color           = Color("Foreground")
+        static let recordElement: Color        = Color("RecordElement")
         static let subScreenButtons: Color     = Color.gray
         static let gradient: [Color]           = [.white, .white]
     }
 }
+

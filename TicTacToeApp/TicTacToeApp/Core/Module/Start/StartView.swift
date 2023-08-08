@@ -53,26 +53,46 @@ struct StartView: View {
                 
                 if startVM.showInfo {
                     InfoView()
+                        .zIndex(1)
+                        .transition(.opacity.animation(.easeInOut(duration: 0.3)))
+                }
+                
+                if startVM.showRecords {
+                    RecordView()
+                        .zIndex(1)
+                        .transition(.opacity.animation(.easeInOut(duration: 0.3)))
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        startVM.showInfo.toggle()
+                        if !startVM.showRecords {
+                            withAnimation {
+                                startVM.showInfo.toggle()
+                            }
+                        }
                     } label: {
                         if startVM.showInfo {
-                            Image(systemName: R.Images.backStartButton).foregroundColor(R.Colors.buttonSet)
+                            Image(systemName: R.Images.backStartButtonLeft).foregroundColor(R.Colors.buttonSet)
                         } else {
                             Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.buttonSet)
                         }
                     }
+                    .opacity(startVM.showRecords ? 0 : 1)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        //
+                        if !startVM.showInfo {
+                            startVM.showRecords.toggle()
+                        }
                     } label: {
-                        Image(systemName: R.Images.settingsScreenButton).foregroundColor(R.Colors.buttonSet)
+                        if startVM.showRecords {
+                            Image(systemName: R.Images.backStartButtonRight).foregroundColor(R.Colors.buttonSet)
+                        } else {
+                            Image(systemName: R.Images.recordsScreenButton).foregroundColor(R.Colors.buttonSet)
+                        }
                     }
+                    .opacity(startVM.showInfo ? 0 : 1)
                 }
             }
             .edgesIgnoringSafeArea(.all)
@@ -80,9 +100,3 @@ struct StartView: View {
         }
     }
 }
-
-//struct StartView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StartView()
-//    }
-//}

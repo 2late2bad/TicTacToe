@@ -10,6 +10,7 @@ import SwiftUI
 final class StartViewModel: ObservableObject {
     
     @Published var showInfo: Bool = false
+    @Published var showRecords: Bool = false
     
     @Published var animationAmount: Double = 1.0
     @Published var showComplexity: Bool = false
@@ -31,5 +32,4 @@ final class StartViewModel: ObservableObject {
     public func gameTypeChange(_ type: TypeGame) {
         type == .AI ? (showComplexity = true) : (showComplexity = false)
     }
-
 }

@@ -32,6 +32,11 @@
 		24C2990E2A3396C900E2ED2C /* NewZelek.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C2990D2A3396C900E2ED2C /* NewZelek.ttf */; };
 		24C299122A339E6800E2ED2C /* WinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C299112A339E6800E2ED2C /* WinnerView.swift */; };
 		24CAFED02A815B650079D947 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFECF2A815B650079D947 /* InfoView.swift */; };
+		24CAFED32A8169FE0079D947 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFED22A8169FE0079D947 /* RecordView.swift */; };
+		24CAFED62A81A5B70079D947 /* RecordCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFED52A81A5B70079D947 /* RecordCellView.swift */; };
+		24CAFED92A81C2F40079D947 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFED82A81C2F40079D947 /* Date+Ext.swift */; };
+		24CAFEDB2A81C8280079D947 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFEDA2A81C8280079D947 /* RecordModel.swift */; };
+		24CAFEDD2A81C84F0079D947 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFEDC2A81C84F0079D947 /* RecordViewModel.swift */; };
 		24D9864D29CA0C0100F75393 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9864C29CA0C0100F75393 /* StartView.swift */; };
 		24D9864F29CA118700F75393 /* StartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9864E29CA118700F75393 /* StartModel.swift */; };
 		24D9865129CA119200F75393 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9865029CA119200F75393 /* StartViewModel.swift */; };
@@ -76,6 +81,11 @@
 		24C2990D2A3396C900E2ED2C /* NewZelek.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewZelek.ttf; sourceTree = "<group>"; };
 		24C299112A339E6800E2ED2C /* WinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerView.swift; sourceTree = "<group>"; };
 		24CAFECF2A815B650079D947 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		24CAFED22A8169FE0079D947 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		24CAFED52A81A5B70079D947 /* RecordCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCellView.swift; sourceTree = "<group>"; };
+		24CAFED82A81C2F40079D947 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		24CAFEDA2A81C8280079D947 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
+		24CAFEDC2A81C84F0079D947 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		24D9864C29CA0C0100F75393 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		24D9864E29CA118700F75393 /* StartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartModel.swift; sourceTree = "<group>"; };
 		24D9865029CA119200F75393 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +135,7 @@
 			children = (
 				24CAFECA2A815A860079D947 /* Core */,
 				24F2F91029C39A7900B0D895 /* Custom */,
+				24CAFED72A81C2E50079D947 /* Extension */,
 				248999BE29C4EA8900DBE791 /* SupportingFiles */,
 				241C59D029C3874000F744A1 /* Preview Content */,
 			);
@@ -221,6 +232,7 @@
 				241C59D829C388E700F744A1 /* Game */,
 				24C299142A33C0BE00E2ED2C /* Winner */,
 				24CAFECE2A815B4D0079D947 /* Info */,
+				24CAFED12A8169DD0079D947 /* Record */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -247,6 +259,33 @@
 				24CAFECF2A815B650079D947 /* InfoView.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		24CAFED12A8169DD0079D947 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				24CAFED42A81A3A50079D947 /* Cell */,
+				24CAFED22A8169FE0079D947 /* RecordView.swift */,
+				24CAFEDA2A81C8280079D947 /* RecordModel.swift */,
+				24CAFEDC2A81C84F0079D947 /* RecordViewModel.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		24CAFED42A81A3A50079D947 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				24CAFED52A81A5B70079D947 /* RecordCellView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		24CAFED72A81C2E50079D947 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				24CAFED82A81C2F40079D947 /* Date+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		24D9864B29CA0BEE00F75393 /* Start */ = {
@@ -399,6 +438,7 @@
 				24A81E772A3A2F64005FD85D /* TurnView.swift in Sources */,
 				24D9865529CA5EAF00F75393 /* GoButtonView.swift in Sources */,
 				24F2F91A29C3AB6800B0D895 /* CircleCustomView.swift in Sources */,
+				24CAFED92A81C2F40079D947 /* Date+Ext.swift in Sources */,
 				24DD6C7D2A375AC50057CC86 /* ArtificialIntelligence.swift in Sources */,
 				24F2F90F29C3956F00B0D895 /* GameModel.swift in Sources */,
 				24A81E6D2A3A23ED005FD85D /* GameDefinitionView.swift in Sources */,
@@ -409,10 +449,14 @@
 				24A81E7B2A3A3043005FD85D /* AIStatusView.swift in Sources */,
 				24F6842A2A3B939500AFEDCD /* ReactionService.swift in Sources */,
 				24A81E6F2A3A2697005FD85D /* DefinitionComplexityView.swift in Sources */,
+				24CAFED32A8169FE0079D947 /* RecordView.swift in Sources */,
 				248999BC29C4DB0100DBE791 /* PlayerIndicatorView.swift in Sources */,
 				24F2F91429C39C0700B0D895 /* RhombusShape.swift in Sources */,
+				24CAFEDD2A81C84F0079D947 /* RecordViewModel.swift in Sources */,
+				24CAFED62A81A5B70079D947 /* RecordCellView.swift in Sources */,
 				24D9865129CA119200F75393 /* StartViewModel.swift in Sources */,
 				24C299122A339E6800E2ED2C /* WinnerView.swift in Sources */,
+				24CAFEDB2A81C8280079D947 /* RecordModel.swift in Sources */,
 				24DD6C7F2A377FCC0057CC86 /* AlertModel.swift in Sources */,
 				24F2F91829C3A01800B0D895 /* GridView.swift in Sources */,
 				24F2F90B29C3955800B0D895 /* GameView.swift in Sources */,
@@ -562,7 +606,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -593,7 +637,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
