@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Complexity: String, CaseIterable, Identifiable {
+enum Complexity: String, CaseIterable, Identifiable, Codable {
     case Easy
     case Hard
     case HELL

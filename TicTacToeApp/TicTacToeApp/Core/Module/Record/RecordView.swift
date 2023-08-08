@@ -25,6 +25,7 @@ struct RecordView: View {
                     RecordCellView(player: item.winner,
                                    score: item.score,
                                    type: item.type,
+                                   complexity: item.complexity,
                                    date: item.date)
                     .listRowBackground(R.Colors.background)
                     .padding(.vertical, 6)

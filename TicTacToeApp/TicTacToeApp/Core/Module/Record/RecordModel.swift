@@ -12,5 +12,6 @@ struct RecordModel: Identifiable, Codable {
     let winner: Player
     let score: String
     let type: TypeGame
+    let complexity: Complexity
     let date: Date
 }

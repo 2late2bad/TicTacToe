@@ -12,6 +12,7 @@ struct RecordCellView: View {
     let player: Player
     let score: String
     let type: TypeGame
+    let complexity: Complexity
     let date: Date
     
     var body: some View {
@@ -30,11 +31,11 @@ struct RecordCellView: View {
                 .foregroundColor(R.Colors.text)
                 .lineLimit(1)
             Spacer()
-            Text(type.rawValue)
-                .frame(width: 38)
+            Text(type == .PvP ? type.rawValue : "\(type.rawValue) \(complexity.rawValue)")
+                .frame(width: 64)
                 .foregroundColor(R.Colors.text)
                 .lineLimit(1)
-                .font(R.Fonts.Marske(size: 22))
+                .font(R.Fonts.Marske(size: 20))
             Spacer()
             Text(date.displayFormat())
                 .frame(width: 120)
@@ -48,6 +49,6 @@ struct RecordCellView: View {
 
 struct RecordCellView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordCellView(player: .cross, score: "3 - 1", type: .PvP, date: .now)
+        RecordCellView(player: .cross, score: "3 - 1", type: .AI, complexity: .HELL, date: .now)
     }
 }

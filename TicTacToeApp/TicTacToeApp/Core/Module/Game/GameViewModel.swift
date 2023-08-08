@@ -210,6 +210,7 @@ private extension GameViewModel {
         let record = RecordModel(winner: winner,
                                  score: "\(xWins) - \(sumOfWins - oWins)",
                                  type: selectedTypeOfGame,
+                                 complexity: selectedComplexity,
                                  date: .now)
         storage.append(object: record, forKey: .records)
     }
