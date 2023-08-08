@@ -17,6 +17,16 @@
 "pvp_type" = "PvP";
 "ai_type" = "AI";
 
+// MARK: - Game screen
+"round" = "ROUND";
+"turn" = "TURN:";
+"ai_status" = "AI";
+"ai_disabled" = "Disabled";
+
+// MARK: - Game screen
+"winner_label" = "Winner";
+"match_score" = "Match score";
+
 // MARK: - Info screen
 "created_by" = "Created by";
 "all_right_reserved" = "All rights reserved";

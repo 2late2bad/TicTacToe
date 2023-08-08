@@ -31,18 +31,5 @@ struct WinRatesView: View {
                 }
             }
         }
-        // Indicators for animation
-//        CrossCustomView(width: 11, height: 2, degress: 45, anim: false)
-//            .frame(width: 20, height: 20)
-//            .foregroundColor(R.Colors.indicatorDefault)
-//            .position(x: gameVM.indicatorCrossPosition.x, y: gameVM.indicatorCrossPosition.y)
-//            .opacity(gameVM.indicatorCrossOpacity)
-//            .animation(.linear, value: gameVM.indicatorCrossOpacity)
-//        CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthExtra)
-//            .frame(width: 20, height: 20)
-//            .foregroundColor(R.Colors.indicatorDefault)
-//            .position(x: gameVM.indicatorZeroPosition.x, y: gameVM.indicatorZeroPosition.y)
-//            .opacity(gameVM.indicatorZeroOpacity)
-//            .animation(.linear, value: gameVM.indicatorZeroOpacity)
     }
 }

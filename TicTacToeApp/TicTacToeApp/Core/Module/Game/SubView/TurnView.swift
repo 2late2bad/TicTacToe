@@ -13,7 +13,7 @@ struct TurnView: View {
     
     var body: some View {
         HStack {
-            Text("TURN:")
+            Text("turn".localized)
                 .font(R.Fonts.DisketMono(size: 20))
                 .foregroundColor(R.Colors.text)
             CrossCustomView(width: 10, height: 2, degress: 45, anim: false)
@@ -28,4 +28,17 @@ struct TurnView: View {
     }
 }
 
-
+// TODO: - Animation
+// Indicators for animation
+//        CrossCustomView(width: 11, height: 2, degress: 45, anim: false)
+//            .frame(width: 20, height: 20)
+//            .foregroundColor(R.Colors.indicatorDefault)
+//            .position(x: gameVM.indicatorCrossPosition.x, y: gameVM.indicatorCrossPosition.y)
+//            .opacity(gameVM.indicatorCrossOpacity)
+//            .animation(.linear, value: gameVM.indicatorCrossOpacity)
+//        CircleCustomView(lineWidth: R.Indicators.Circle.lineWidthExtra)
+//            .frame(width: 20, height: 20)
+//            .foregroundColor(R.Colors.indicatorDefault)
+//            .position(x: gameVM.indicatorZeroPosition.x, y: gameVM.indicatorZeroPosition.y)
+//            .opacity(gameVM.indicatorZeroOpacity)
+//            .animation(.linear, value: gameVM.indicatorZeroOpacity)

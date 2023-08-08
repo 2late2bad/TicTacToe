@@ -12,7 +12,7 @@ struct AIStatusView: View {
     @EnvironmentObject var gameVM: GameViewModel
     
     var body: some View {
-        Text("AI: \(gameVM.selectedTypeOfGame == .PvP ? "Disabled" : gameVM.selectedComplexity.rawValue)")
+        Text("\("ai_status".localized): \(gameVM.selectedTypeOfGame == .PvP ? "ai_disabled".localized : gameVM.selectedComplexity.title)")
             .font(R.Fonts.DisketMono(size: 10))
             .foregroundColor(R.Colors.text.opacity(0.8))
             .onTapGesture {

@@ -22,8 +22,10 @@ struct WinnerView: View {
                 
                 VStack {
                     Spacer()
-                    Text("Winner")
-                        .font(R.Fonts.Cyberpunk(size: 60))
+                    Text("winner_label".localized)
+                        .font(R.Fonts.Marske(size: 60))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                         .foregroundColor(R.Colors.indicatorsFlashing)
                         .transition(.scale)
                         .padding(.bottom, 20)
@@ -44,7 +46,7 @@ struct WinnerView: View {
                             }
                         }
                         
-                        Text("Match score: \(gameVM.xWins) - \(gameVM.sumOfWins - gameVM.oWins)")
+                        Text("\("match_score".localized): \(gameVM.xWins) - \(gameVM.sumOfWins - gameVM.oWins)")
                             .font(R.Fonts.Marske(size: 40))
                             .foregroundColor(R.Colors.text)
                             .padding([.bottom], 60)
@@ -98,7 +100,6 @@ struct WinnerView: View {
                     Spacer()
                 }
             }
-
         }
     }
 }

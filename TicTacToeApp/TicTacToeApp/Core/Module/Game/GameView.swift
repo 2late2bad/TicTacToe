@@ -23,7 +23,7 @@ struct GameView: View {
                         .padding(.bottom, 8)
                     
                     VStack(spacing: 0) {
-                        Text("ROUND \(gameVM.currentRound)")
+                        Text("\("round".localized) \(gameVM.currentRound)")
                             .font(R.Fonts.Marske(size: 50))
                             .lineLimit(1)
                             .foregroundColor(R.Colors.text)

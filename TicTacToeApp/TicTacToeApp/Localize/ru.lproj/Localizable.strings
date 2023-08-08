@@ -17,6 +17,16 @@
 "pvp_type" = "2 игрока";
 "ai_type" = "Против ИИ";
 
+// MARK: - Game screen
+"round" = "РАУНД";
+"turn" = "ХОД:";
+"ai_status" = "ИИ";
+"ai_disabled" = "Отключен";
+
+// MARK: - Game screen
+"winner_label" = "Победитель";
+"match_score" = "Счет матча";
+
 // MARK: - Info screen
 "created_by" = "Создано";
 "all_right_reserved" = "Все права защищены";
