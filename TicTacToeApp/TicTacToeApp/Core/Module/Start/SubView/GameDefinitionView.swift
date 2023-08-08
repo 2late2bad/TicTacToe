@@ -17,7 +17,7 @@ struct GameDefinitionView: View {
             HStack {
                 Text("round_of_wins".localized)
                     .font(R.Fonts.DisketMono(size: 18))
-                    .minimumScaleFactor(0.7)
+                    .minimumScaleFactor(0.5)
                     .foregroundColor(R.Colors.text)
                     .lineLimit(1)
                 Stepper("\(gameVM.sumOfWins)",

@@ -9,7 +9,7 @@
 // MARK: - Start screen
 "game_name" = "КРЕСТИКИ НОЛИКИ";
 "go_button" = "GO!";
-"round_of_wins" = "Побед для матча:";
+"round_of_wins" = "Раундов до победы:";
 "difficalty_level" = "Уровень сложности";
 "easy_comp" = "Легкий";
 "hard_comp" = "Тяжелый";
@@ -35,3 +35,19 @@
 
 // MARK: - Record screen
 "records" = "Матчи";
+
+// MARK: - Alert
+"activation_ai" = "Вы хотите активировать искусственный интеллект?";
+"ai_difficalty_select" = "Выберите сложность ИИ:";
+
+"stop_game_title" = "Прекратить игру?";
+"stop_game_message" = "Это сбросит результаты матча";
+
+"disable_ai_title" = "Отключить ИИ?";
+"disable_ai_message" = "Игра продолжится в режиме игрок против игрока";
+
+"error_selected_title" = "Изменить тип игры возможно только на ходе игрока 'Крестик'";
+
+"button_no" = "НЕТ";
+"button_yes" = "ДА";
+"button_ok" = "ОК";

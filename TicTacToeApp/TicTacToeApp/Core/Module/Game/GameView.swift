@@ -73,11 +73,11 @@ struct GameView: View {
                presenting: gameVM.alertItem,
                actions: { _ in AlertButtonsView() },
                message: { item in item.message })
-        .confirmationDialog("Do you want to activate AI?",
+        .confirmationDialog("activation_ai".localized,
                             isPresented: $gameVM.showingActiveAIDialog,
                             titleVisibility: .visible,
                             actions: { AlertButtonsView() },
-                            message: { Text("Select AI difficulty") })
+                            message: { Text("ai_difficalty_select".localized) })
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 gameVM.newRound(andMatch: true)

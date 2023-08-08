@@ -35,3 +35,19 @@
 
 // MARK: - Record screen
 "records" = "Records";
+
+// MARK: - Alert
+"activation_ai" = "Do you want to activate AI?";
+"ai_difficalty_select" = "Select AI difficulty:";
+
+"stop_game_title" = "Leave the match?";
+"stop_game_message" = "It will reset the game";
+
+"disable_ai_title" = "Disable AI";
+"disable_ai_message" = "The game will continue with PvP type";
+
+"error_selected_title" = "You can change the type of game at the turn of the cross";
+
+"button_no" = "NO";
+"button_yes" = "YES";
+"button_ok" = "OK";
