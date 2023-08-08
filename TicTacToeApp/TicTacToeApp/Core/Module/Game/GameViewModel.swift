@@ -35,7 +35,8 @@ final class GameViewModel: ObservableObject {
     @Published var alertItem: AlertModel?
     
     let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence()
-    let reaction: ReactionServiceProtocol  = ReactionService()
+    let reaction: ReactionServiceProtocol = ReactionService()
+    private let storage: StorageServiceProtocol = StorageService.shared
     var (isCrossTurn, showingOutcome)                 = (true, false)
     var textOutcome: String                           = "FIGHT!"
     var roundLabelRotation: Double                    = 360
@@ -195,12 +196,22 @@ private extension GameViewModel {
         player == .cross ? (xWins += 1) : (oWins -= 1)
         textOutcome = reaction.matchResult(player: player, typeGame: selectedTypeOfGame)
         showingOutcome = true
+        saveMatch(winner: player)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             showingOutcome = false
             withAnimation {
                 showingSheet = true
             }
         }
+    }
+    
+    // Сохранение результата матча в хранилище
+    func saveMatch(winner: Player) {
+        let record = RecordModel(winner: winner,
+                                 score: "\(xWins) - \(sumOfWins - oWins)",
+                                 type: selectedTypeOfGame,
+                                 date: .now)
+        storage.append(object: record, forKey: .records)
     }
 }
 
@@ -241,11 +252,6 @@ private extension GameViewModel {
         withAnimation(animation.delay(0.65)) {
             indicatorColor = R.Colors.indicatorDefault
         }
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.65) { [self] in
-//            withAnimation(animation) {
-//                indicatorColor = R.Colors.indicatorDefault
-//            }
-//        }
     }
     
     // Анимация доски в случае ничьи

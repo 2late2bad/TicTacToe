@@ -36,7 +36,7 @@ struct RecordCellView: View {
                 .lineLimit(1)
                 .font(R.Fonts.Marske(size: 22))
             Spacer()
-            Text(date.displayFormat)
+            Text(date.displayFormat())
                 .frame(width: 120)
                 .foregroundColor(R.Colors.text)
                 .font(R.Fonts.Marske(size: 20))

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Player: String {
+enum Player: String, Codable {
     case cross = "Cross"
     case zero = "Zero"
 }

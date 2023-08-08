@@ -22,7 +22,7 @@ struct RecordView: View {
                     .ignoresSafeArea()
                 
                 List(recordVM.records, id: \.id) { item in
-                    RecordCellView(player: item.player,
+                    RecordCellView(player: item.winner,
                                    score: item.score,
                                    type: item.type,
                                    date: item.date)

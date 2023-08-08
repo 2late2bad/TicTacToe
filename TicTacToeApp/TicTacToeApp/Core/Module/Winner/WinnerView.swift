@@ -10,9 +10,10 @@ import SwiftUI
 struct WinnerView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
+    @State private var winnerVM = WinnerViewModel()
     @State private var animationDegrees: Double = 0
     @State private var animationOpacity: Double = 0.3
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {

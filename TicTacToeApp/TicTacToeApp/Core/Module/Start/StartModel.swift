@@ -28,7 +28,7 @@ enum Complexity: String, CaseIterable, Identifiable {
     }
 }
 
-enum TypeGame: String, CaseIterable, Identifiable {
+enum TypeGame: String, CaseIterable, Identifiable, Codable {
     case PvP
     case AI
     

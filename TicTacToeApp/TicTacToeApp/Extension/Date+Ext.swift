@@ -8,14 +8,16 @@
 import Foundation
 
 extension Date {
-    
-    var displayFormat: String {
-        self.formatted(
-            .dateTime
-                .hour(.conversationalDefaultDigits(amPM: .omitted))
-                .minute(.twoDigits)
-                .day(.twoDigits)
+        
+    func displayFormat() -> String {
+        let formatStyle = FormatStyle(locale: .init(identifier: "ru_RU"))
+        return self.formatted(
+            formatStyle
+                .hour()
+                .minute()
+                .day()
                 .month(.twoDigits)
-                .year(.twoDigits))
+                .year(.twoDigits)
+        )
     }
 }
