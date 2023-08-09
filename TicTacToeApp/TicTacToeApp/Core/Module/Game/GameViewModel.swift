@@ -15,7 +15,7 @@ final class GameViewModel: ObservableObject {
     
     @Published var moves: [Move?]                 = R.Indicators.resetMoves
     @Published var indicatorColor: Color          = R.Colors.indicatorDefault
-    @Published var gridOpacity: Double            = R.Indicators.Grid.opacity
+    @Published var gridColor: Color               = R.Colors.grid
     @Published var isGameboardDisabled            = false
     @Published var muteSound: Bool                = false
     @Published var showingSheet: Bool             = false
@@ -246,25 +246,23 @@ private extension GameViewModel {
     
     // Анимация победной линии
     func winLineAnimation() {
-        let animation = Animation.easeIn(duration: 0.07).repeatCount(5, autoreverses: true)
+        let animation = Animation.easeInOut(duration: 0.1).repeatCount(7, autoreverses: true)
         withAnimation(animation.delay(0.3)) {
             indicatorColor = R.Colors.indicatorsFlashing
         }
-        withAnimation(animation.delay(0.65)) {
+        withAnimation(.default.delay(1)) {
             indicatorColor = R.Colors.indicatorDefault
         }
     }
     
     // Анимация доски в случае ничьи
     func drawAnimation() {
-        let animation = Animation.easeInOut(duration: 0.08).repeatCount(5, autoreverses: true)
+        let animation = Animation.easeInOut(duration: 0.1).repeatCount(6, autoreverses: true)
         withAnimation(animation.delay(0.2)) {
-            gridOpacity = 1
+            gridColor = R.Colors.indicatorsFlashing.opacity(1)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            withAnimation(animation) {
-                gridOpacity = R.Indicators.Grid.opacity
-            }
+        withAnimation(.easeInOut(duration: 0.1).delay(0.8)) {
+            gridColor = R.Colors.grid
         }
     }
 }

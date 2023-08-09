@@ -16,7 +16,7 @@ struct GameBoardView: View {
         ZStack {
             
             GridView(frameGrid: (width: geometry.size.width, height: geometry.size.width))
-                .opacity(gameVM.gridOpacity)
+                .foregroundColor(gameVM.gridColor)
             
             VStack {
                 LazyVGrid(columns: gameVM.columns, spacing: 17) {

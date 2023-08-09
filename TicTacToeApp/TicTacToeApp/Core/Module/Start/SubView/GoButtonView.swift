@@ -14,9 +14,8 @@ struct GoButtonView: View {
             GameView()
         } label: {
             Text("go_button".localized)
-                .shadow(color: .black.opacity(0.7), radius: 8, x: 0, y: 0)
                 .padding(40)
-                .background(R.Colors.useElement.opacity(0.85))
+                .background(R.Colors.useElement)
                 .foregroundColor(R.Colors.foreground)
                 .clipShape(Circle())
                 .font(Font.system(size: 30, weight: .medium, design: .serif))

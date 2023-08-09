@@ -35,7 +35,7 @@ enum Resources {
         enum Grid {
             static let indentLines: CGFloat  = 16
             static let thickness: CGFloat    = 2
-            static let opacity: Double       = 0.2
+            //static let opacity: Double       = 0.2
             static let animDuration: Double  = 0.8
         }
         
@@ -80,8 +80,8 @@ enum Resources {
         static let buttonSet: Color            = Color("ButtonSet")
         static let foreground: Color           = Color("Foreground")
         static let recordElement: Color        = Color("RecordElement")
+        static let grid: Color                 = Color("Grid")
         static let subScreenButtons: Color     = Color.gray
-        static let gradient: [Color]           = [.white, .white]
     }
 }
 
