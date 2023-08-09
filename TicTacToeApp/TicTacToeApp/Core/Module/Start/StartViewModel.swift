@@ -15,6 +15,7 @@ final class StartViewModel: ObservableObject {
     @Published var animationAmount: Double = 1.0
     @Published var showComplexity: Bool = false
     @Published var fontIncreaseAnimation: CGFloat = 14
+    @Published var opacityNeedAnim: Double = 1
     
     public func goButtonAnimation(amount: Double) {
         animationAmount = amount

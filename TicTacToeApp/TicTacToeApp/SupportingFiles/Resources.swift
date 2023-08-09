@@ -55,7 +55,7 @@ enum Resources {
     
     enum Images {
         static let infoScreenButton: String     = "questionmark.circle"
-        static let recordsScreenButton: String  = "flag.filled.and.flag.crossed"
+        static let recordsScreenButton: String  = "trophy"
         static let exitGameButton: String       = "xmark.circle"
         static let muteOnButton: String         = "speaker.slash.fill"
         static let muteOffButton: String        = "speaker"

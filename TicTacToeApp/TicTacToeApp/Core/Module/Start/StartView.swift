@@ -11,7 +11,7 @@ struct StartView: View {
     
     @StateObject var startVM: StartViewModel = StartViewModel()
     @EnvironmentObject var gameVM: GameViewModel
-    
+        
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.useElement)
         UISegmentedControl.appearance().setTitleTextAttributes(
@@ -31,6 +31,7 @@ struct StartView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                         .foregroundColor(R.Colors.text)
+                        .opacity(startVM.opacityNeedAnim)
                         .padding(.vertical, 40)
                         .padding(.horizontal, 20)
                     Spacer()
@@ -43,12 +44,14 @@ struct StartView: View {
                                 .animation(.easeInOut(duration: 3).repeatForever(autoreverses: false),
                                            value: startVM.animationAmount)
                         }
+                        .opacity(startVM.opacityNeedAnim)
                         .onAppear {
                             startVM.goButtonAnimation(amount: 2)
                         }
                         .padding(.bottom, 20)
                     Spacer()
                     GameDefinitionView(startVM: startVM)
+                        .opacity(startVM.opacityNeedAnim)
                         .padding(.horizontal, 40)
                         .padding(.vertical, 20)
                     Spacer()
@@ -57,7 +60,7 @@ struct StartView: View {
                 if startVM.showInfo {
                     InfoView()
                         .zIndex(1)
-                        .transition(.opacity.animation(.easeInOut(duration: 0.3)))
+                        .transition(.opacity.animation(.easeInOut(duration: 0.2)))
                 }
                 
                 if startVM.showRecords {
@@ -81,11 +84,14 @@ struct StartView: View {
                             Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.buttonSet)
                         }
                     }
-                    .opacity(startVM.showRecords ? 0 : 1)
+                    .opacity(startVM.opacityNeedAnim)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         if !startVM.showInfo {
+                            withAnimation(.linear(duration: 0.3)) {
+                                startVM.opacityNeedAnim = startVM.opacityNeedAnim == 1 ? 0 : 1
+                            }
                             startVM.showRecords.toggle()
                         }
                     } label: {
