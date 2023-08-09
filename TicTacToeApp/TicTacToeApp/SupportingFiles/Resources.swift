@@ -35,7 +35,6 @@ enum Resources {
         enum Grid {
             static let indentLines: CGFloat  = 16
             static let thickness: CGFloat    = 2
-            //static let opacity: Double       = 0.2
             static let animDuration: Double  = 0.8
         }
         
@@ -43,13 +42,11 @@ enum Resources {
             static let angleForce: CGFloat = 0.12
             static let lenght: CGFloat     = 82
             static let thickness: CGFloat  = 12
-            static let positionTurn: (x: CGFloat, y: CGFloat) = (x: 212, y: -68)
         }
         
         enum Circle {
             static let lineWidthDesk: CGFloat  = 11
             static let lineWidthExtra: CGFloat = 2
-            static let positionTurn: (x: CGFloat, y: CGFloat) = (x: 240, y: -78)
         }
     }
     

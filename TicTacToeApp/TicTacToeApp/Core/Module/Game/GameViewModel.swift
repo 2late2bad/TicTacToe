@@ -40,8 +40,6 @@ final class GameViewModel: ObservableObject {
     var (isCrossTurn, showingOutcome)                 = (true, false)
     var textOutcome: String                           = "FIGHT!"
     var roundLabelRotation: Double                    = 360
-    var indicatorCrossPosition                        = R.Indicators.Cross.positionTurn
-    var indicatorZeroPosition                         = R.Indicators.Circle.positionTurn
     var winningCells: [Int]                           = []
     var (indicatorCrossOpacity, indicatorZeroOpacity) = (0.0, 0.0)
     var (currentRound, xWins, oWins)                  = (1, 0, 1)
@@ -103,8 +101,6 @@ final class GameViewModel: ObservableObject {
         isCrossTurn = true
         isGameboardDisabled = false
         if andMatch {
-            indicatorCrossPosition = R.Indicators.Cross.positionTurn
-            indicatorZeroPosition = R.Indicators.Circle.positionTurn
             currentRound = 1
             xWins = 0
             oWins = sumOfWins
@@ -224,18 +220,8 @@ private extension GameViewModel {
         switch player {
         case .cross:
             indicatorCrossOpacity = 1
-            if xWins == 0 {
-                indicatorCrossPosition = (x: 10, y: -18)
-            } else {
-                indicatorCrossPosition.x += 28
-            }
         case .zero:
             indicatorZeroOpacity = 1
-            if (sumOfWins - oWins) == 0 {
-                indicatorZeroPosition = (x: 364, y: -28)
-            } else {
-                indicatorZeroPosition.x -= 28
-            }
         }
     }
     
