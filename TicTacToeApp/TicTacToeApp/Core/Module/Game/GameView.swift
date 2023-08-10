@@ -10,7 +10,8 @@ import SwiftUI
 struct GameView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
-    
+    @EnvironmentObject var startVM: StartViewModel
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
@@ -20,7 +21,7 @@ struct GameView: View {
                 VStack(alignment: .center) {
                     HeadButtonsView()
                         .padding(.horizontal)
-                        .padding(.bottom, 8)
+                        .padding(.bottom, 6)
                     
                     VStack(spacing: 0) {
                         Text("\("round".localized) \(gameVM.currentRound)")
@@ -58,6 +59,7 @@ struct GameView: View {
                     
                     AIStatusView()
                 }
+                .opacity(startVM.showDesk)
                 .scenePadding([.top, .bottom])
                 
                 if gameVM.showingSheet {
@@ -67,7 +69,7 @@ struct GameView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .bottomBar)
         .alert(gameVM.alertItem?.title ?? Text(""),
                isPresented: $gameVM.showingAlert,
                presenting: gameVM.alertItem,

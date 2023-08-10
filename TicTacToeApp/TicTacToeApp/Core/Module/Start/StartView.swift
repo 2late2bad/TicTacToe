@@ -11,7 +11,7 @@ struct StartView: View {
     
     @StateObject var startVM: StartViewModel = StartViewModel()
     @EnvironmentObject var gameVM: GameViewModel
-        
+    
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.useElement)
         UISegmentedControl.appearance().setTitleTextAttributes(
@@ -24,7 +24,7 @@ struct StartView: View {
                 R.Colors.background
                     .ignoresSafeArea()
                 
-                VStack(spacing: 0) {
+                VStack(spacing: 40) {
                     Spacer()
                     Text("game_name".localized)
                         .font(R.Fonts.Marske(size: 50))
@@ -32,35 +32,35 @@ struct StartView: View {
                         .minimumScaleFactor(0.8)
                         .foregroundColor(R.Colors.text)
                         .opacity(startVM.opacityNeedAnim)
-                        .padding(.vertical, 40)
                         .padding(.horizontal, 20)
                     Spacer()
                     GoButtonView()
-                        .overlay {
-                            Circle()
-                                .stroke(R.Colors.useElement)
-                                .scaleEffect(startVM.animationAmount)
-                                .opacity(2 - startVM.animationAmount)
-                                .animation(.easeInOut(duration: 3).repeatForever(autoreverses: false),
-                                           value: startVM.animationAmount)
-                        }
-                        .opacity(startVM.opacityNeedAnim)
+                        .scaleEffect(startVM.showWaves ? 1 : 1.1)
+                        .shadow(color: R.Colors.indicatorsFlashing, radius: startVM.showWaves ? 0 : 10)
+                        .shadow(color: R.Colors.indicatorsFlashing, radius: startVM.showWaves ? 0 : 10)
+                        .animation(.easeInOut(duration: 1).repeatForever(autoreverses: true),
+                                   value: startVM.showWaves)
                         .onAppear {
-                            startVM.goButtonAnimation(amount: 2)
+                            startVM.showWaves.toggle()
                         }
-                        .padding(.bottom, 20)
                     Spacer()
                     GameDefinitionView(startVM: startVM)
                         .opacity(startVM.opacityNeedAnim)
                         .padding(.horizontal, 40)
-                        .padding(.vertical, 20)
-                    Spacer()
+                }
+                .padding(.bottom, 40)
+                
+                if startVM.showGame {
+                    GameView()
+                        .zIndex(1)
+                        .transition(.asymmetric(insertion: .opacity.animation(.linear(duration: 0.5).delay(0.4)),
+                                                removal: .opacity.animation(.linear(duration: 0.5))))
                 }
                 
                 if startVM.showInfo {
                     InfoView()
                         .zIndex(1)
-                        .transition(.opacity.animation(.easeInOut(duration: 0.2)))
+                        .transition(.opacity.animation(.easeInOut(duration: 0.3)))
                 }
                 
                 if startVM.showRecords {
@@ -82,9 +82,10 @@ struct StartView: View {
                             Image(systemName: R.Images.backStartButtonLeft).foregroundColor(R.Colors.buttonSet)
                         } else {
                             Image(systemName: R.Images.infoScreenButton).foregroundColor(R.Colors.buttonSet)
+                                .opacity(startVM.opacityNeedAnim)
                         }
                     }
-                    .opacity(startVM.opacityNeedAnim)
+                    .opacity(startVM.showRecords ? 0 : 1)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
@@ -99,13 +100,14 @@ struct StartView: View {
                             Image(systemName: R.Images.backStartButtonRight).foregroundColor(R.Colors.buttonSet)
                         } else {
                             Image(systemName: R.Images.recordsScreenButton).foregroundColor(R.Colors.buttonSet)
+                                .opacity(startVM.opacityNeedAnim)
                         }
                     }
                     .opacity(startVM.showInfo ? 0 : 1)
                 }
             }
-            .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)
+            .environmentObject(startVM)
         }
     }
 }

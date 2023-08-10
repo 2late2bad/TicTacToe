@@ -10,7 +10,7 @@ import SwiftUI
 struct AlertButtonsView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
-    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var startVM: StartViewModel
     
     var body: some View {
         
@@ -21,7 +21,7 @@ struct AlertButtonsView: View {
                 Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
                     gameVM.newRound(andMatch: true)
                     gameVM.selectedTypeOfGame = .PvP
-                    dismiss()
+                    startVM.showGameView(false)
                 }
             case .disableAI:
                 Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}

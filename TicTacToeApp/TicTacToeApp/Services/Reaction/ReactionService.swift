@@ -37,6 +37,7 @@ extension ReactionService: ReactionServiceProtocol {
         switch (xPoint, oPoint, sumOfWins) {
             // Условие first blood (1-0 or 0-1)
         case let (xP , oP, sumP) where ((sumP - oP == 1) && (xP == 0)) || ((sumP - oP == 0) && (xP == 1)):
+            SoundManager.instance.playSound(.firstblood)
             return "FIRST  BLOOD"
             
             // Условие nice catch (1-1, 2-2, 3-3, 4-4, 5-5)

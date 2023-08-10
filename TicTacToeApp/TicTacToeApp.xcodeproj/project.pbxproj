@@ -41,6 +41,8 @@
 		24CAFED92A81C2F40079D947 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFED82A81C2F40079D947 /* Date+Ext.swift */; };
 		24CAFEDB2A81C8280079D947 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFEDA2A81C8280079D947 /* RecordModel.swift */; };
 		24CAFEDD2A81C84F0079D947 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAFEDC2A81C84F0079D947 /* RecordViewModel.swift */; };
+		24D6A9972A844FE600721729 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9962A844FE600721729 /* SoundManager.swift */; };
+		24D6A99A2A84516300721729 /* firstblood.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 24D6A9992A84516300721729 /* firstblood.mp3 */; };
 		24D9864D29CA0C0100F75393 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9864C29CA0C0100F75393 /* StartView.swift */; };
 		24D9864F29CA118700F75393 /* StartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9864E29CA118700F75393 /* StartModel.swift */; };
 		24D9865129CA119200F75393 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9865029CA119200F75393 /* StartViewModel.swift */; };
@@ -95,6 +97,8 @@
 		24CAFED82A81C2F40079D947 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		24CAFEDA2A81C8280079D947 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
 		24CAFEDC2A81C84F0079D947 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		24D6A9962A844FE600721729 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		24D6A9992A84516300721729 /* firstblood.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = firstblood.mp3; sourceTree = "<group>"; };
 		24D9864C29CA0C0100F75393 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		24D9864E29CA118700F75393 /* StartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartModel.swift; sourceTree = "<group>"; };
 		24D9865029CA119200F75393 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
@@ -315,6 +319,23 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		24D6A9952A844FD600721729 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				24D6A9982A8450D000721729 /* DataSound */,
+				24D6A9962A844FE600721729 /* SoundManager.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		24D6A9982A8450D000721729 /* DataSound */ = {
+			isa = PBXGroup;
+			children = (
+				24D6A9992A84516300721729 /* firstblood.mp3 */,
+			);
+			path = DataSound;
+			sourceTree = "<group>";
+		};
 		24D9864B29CA0BEE00F75393 /* Start */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +376,7 @@
 				24CAFECC2A815AE40079D947 /* AI */,
 				245073792A82583B0074416D /* Storage */,
 				24CAFECD2A815AEC0079D947 /* Reaction */,
+				24D6A9952A844FD600721729 /* Sound */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -452,6 +474,7 @@
 				241C59D229C3874000F744A1 /* Preview Assets.xcassets in Resources */,
 				241FBE3E2A027BA2005F461C /* SYNNova-Normal.otf in Resources */,
 				241FBE3C2A027BA2005F461C /* SYNNova-Light.otf in Resources */,
+				24D6A99A2A84516300721729 /* firstblood.mp3 in Resources */,
 				241C59CF29C3874000F744A1 /* Assets.xcassets in Resources */,
 				24C2990E2A3396C900E2ED2C /* NewZelek.ttf in Resources */,
 				241FBE3F2A027BA2005F461C /* SYNNova-Regular.otf in Resources */,
@@ -482,6 +505,7 @@
 				24CAFED32A8169FE0079D947 /* RecordView.swift in Sources */,
 				248999BC29C4DB0100DBE791 /* PlayerIndicatorView.swift in Sources */,
 				245073782A8257FD0074416D /* WinnerViewModel.swift in Sources */,
+				24D6A9972A844FE600721729 /* SoundManager.swift in Sources */,
 				24F2F91429C39C0700B0D895 /* RhombusShape.swift in Sources */,
 				24CAFEDD2A81C84F0079D947 /* RecordViewModel.swift in Sources */,
 				24CAFED62A81A5B70079D947 /* RecordCellView.swift in Sources */,
