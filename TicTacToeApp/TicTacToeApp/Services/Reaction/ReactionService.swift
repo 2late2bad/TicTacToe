@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ReactionServiceProtocol {
-    //
+    // Отключение звуков
     var muteSoundEffect: Bool { get set }
     // Старт игры
     func startGame() -> String
@@ -16,6 +16,8 @@ protocol ReactionServiceProtocol {
     func roundResult(xPoint: Int, oPoint: Int, sumOfWins: Int) -> String
     // Генерация результата матча
     func matchResult(player: Player, typeGame: TypeGame) -> String
+    // Проигрыш конкретных звуков
+    func soundTestYourMight()
 }
 
 final class ReactionService {
@@ -42,6 +44,12 @@ extension ReactionService: ReactionServiceProtocol {
             soundManager.playSound(.roundonefight)
         }
         return "FIGHT!"
+    }
+    
+    func soundTestYourMight() {
+        if canPlaySound {
+            soundManager.playSound(.testyourmight)
+        }
     }
     
     func matchResult(player: Player, typeGame: TypeGame) -> String {

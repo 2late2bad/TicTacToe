@@ -15,6 +15,7 @@ final class SoundManager {
     var player: AVAudioPlayer?
     
     enum SoundOption: String {
+        case testyourmight
         case roundonefight
         case firstblood
         case getoverhere
