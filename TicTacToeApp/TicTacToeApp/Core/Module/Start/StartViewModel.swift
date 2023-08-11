@@ -12,7 +12,6 @@ final class StartViewModel: ObservableObject {
     @Published var isViewDisabled: Bool = false
     
     @Published var showGame: Bool = false
-    @Published var showDesk: Double = 1
     @Published var showInfo: Bool = false
     @Published var showRecords: Bool = false
 
@@ -39,14 +38,12 @@ final class StartViewModel: ObservableObject {
     
     public func showGameView(_ status: Bool) {
         if status {
-            showDesk = 1
             foregroundColorGoButton = .clear
             opacityNeedAnim = 0
             withAnimation(.linear(duration: 0.5)) {
                 scaleGoButton = 10
             }
         } else {
-            showDesk = 0
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7).delay(0.1)) {
                 scaleGoButton = 1
             }

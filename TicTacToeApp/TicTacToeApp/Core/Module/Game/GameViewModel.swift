@@ -13,11 +13,23 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
+    private let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence.shared
+    private var reaction: ReactionServiceProtocol = ReactionService.shared
+    private let storage: StorageServiceProtocol = StorageService.shared
+    var isCrossTurn: Bool            = true
+    var roundLabelRotation: Double   = 360
+    var winningCells: [Int]          = []
+    var (currentRound, xWins, oWins) = (1, 0, 1)
+    
     @Published var moves: [Move?]                 = R.Indicators.resetMoves
     @Published var indicatorColor: Color          = R.Colors.indicatorDefault
     @Published var gridColor: Color               = R.Colors.grid
-    @Published var isGameboardDisabled            = false
-    @Published var muteSound: Bool                = false
+    @Published var isGameboardDisabled            = true
+    @Published var muteSound: Bool                = false {
+        willSet {
+            reaction.muteSoundEffect = newValue
+        }
+    }
     @Published var showingSheet: Bool             = false
     @Published var showingAlert: Bool             = false
     @Published var showingActiveAIDialog: Bool    = false
@@ -33,18 +45,9 @@ final class GameViewModel: ObservableObject {
     }
     @Published var sumOfWins: Int = 1 { willSet { oWins = newValue } }
     @Published var alertItem: AlertModel?
-    
-    private let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence.shared
-    private let reaction: ReactionServiceProtocol = ReactionService.shared
-    private let storage: StorageServiceProtocol = StorageService.shared
-    var isCrossTurn = true
-    
     @Published var scaleEffect: Double = 0.001
     @Published var textOutcome: String = ""
     
-    var roundLabelRotation: Double                    = 360
-    var winningCells: [Int]                           = []
-    var (currentRound, xWins, oWins)                  = (1, 0, 1)
     
     // Ход игрока/AI
     func processPlayerMove(for position: Int) {
@@ -98,12 +101,24 @@ final class GameViewModel: ObservableObject {
     
     // Рестарт матча
     func restartMatch() {
-        resetDesk()
         currentRound = 1
         xWins = 0
         oWins = sumOfWins
+        moves = R.Indicators.resetMoves
+        winningCells = []
+        isCrossTurn = true
+        
         textOutcome = reaction.startGame()
         reactAnimation(delay: 1)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            isGameboardDisabled = false
+        }
+    }
+    
+    // Выход из игры
+    func exitGame() {
+        isGameboardDisabled = true
     }
 }
 
@@ -228,8 +243,8 @@ private extension GameViewModel {
         withAnimation(.easeInOut.delay(delay)) {
             scaleEffect = 1
         }
-        withAnimation(.default.delay(delay + 1)) {
-            scaleEffect = 0.001
+        withAnimation(.easeInOut.delay(delay + 1)) {
+            scaleEffect = 0.01
         }
     }
     

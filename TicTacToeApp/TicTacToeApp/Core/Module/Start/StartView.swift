@@ -53,8 +53,8 @@ struct StartView: View {
                 
                 if startVM.showGame {
                     GameView()
-                        .zIndex(1)
-                        .transition(.asymmetric(insertion: .opacity.animation(.linear(duration: 0.5).delay(0.4)),
+                        .zIndex(2)
+                        .transition(.asymmetric(insertion: .opacity.animation(.linear(duration: 0.5).delay(0.5)),
                                                 removal: .opacity.animation(.linear(duration: 0.5))))
                 }
                 

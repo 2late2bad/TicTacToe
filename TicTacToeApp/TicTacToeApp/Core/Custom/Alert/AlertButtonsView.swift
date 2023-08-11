@@ -19,6 +19,7 @@ struct AlertButtonsView: View {
             case .stopGame:
                 Button(gameVM.alertItem!.buttonTitle1!, role: .cancel) {}
                 Button(gameVM.alertItem!.buttonTitle2!, role: .destructive) {
+                    gameVM.exitGame()
                     gameVM.selectedTypeOfGame = .PvP
                     startVM.waitLoad(delay: 1.5)
                     startVM.showGameView(false)

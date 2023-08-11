@@ -14,6 +14,7 @@ struct HeadButtonsView: View {
     var body: some View {
         HStack {
             Button {
+                guard !gameVM.isGameboardDisabled else { return }
                 gameVM.alertItem = AlertContext.stopGame
                 gameVM.showingAlert = true
             } label: {

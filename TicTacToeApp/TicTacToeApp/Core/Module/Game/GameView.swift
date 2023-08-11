@@ -10,7 +10,6 @@ import SwiftUI
 struct GameView: View {
     
     @EnvironmentObject var gameVM: GameViewModel
-    @EnvironmentObject var startVM: StartViewModel
 
     var body: some View {
         GeometryReader { geometry in
@@ -18,38 +17,36 @@ struct GameView: View {
                 R.Colors.background
                     .ignoresSafeArea()
                 
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 0) {
                     HeadButtonsView()
                         .padding(.horizontal)
-                        .padding(.bottom, 6)
+                        .padding(.bottom, 20)
                     
-                    VStack(spacing: 0) {
-                        Text("\("round".localized) \(gameVM.currentRound)")
-                            .font(R.Fonts.Marske(size: 50))
-                            .lineLimit(1)
-                            .foregroundColor(R.Colors.text)
-                            .rotation3DEffect(.degrees(gameVM.roundLabelRotation), axis: (x: 1, y: 0, z: 0))
-                            .animation(.spring(dampingFraction: 0.7), value: gameVM.roundLabelRotation)
-                        
-                        Text(gameVM.textOutcome)
-                            .frame(height: 40)
-                            .font(R.Fonts.Cyberpunk(size: 30))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.9)
-                            .foregroundColor(R.Colors.indicatorsFlashing)
-                            .scaleEffect(gameVM.scaleEffect)
-                    }
-                    .padding(.bottom, 10)
+                    Text("\("round".localized) \(gameVM.currentRound)")
+                        .font(R.Fonts.Marske(size: 50))
+                        .lineLimit(1)
+                        .foregroundColor(R.Colors.text)
+                        .rotation3DEffect(.degrees(gameVM.roundLabelRotation), axis: (x: 1, y: 0, z: 0))
+                        .animation(.spring(dampingFraction: 0.7), value: gameVM.roundLabelRotation)
                     
+                    Text(gameVM.textOutcome)
+                        .frame(height: 40)
+                        .font(R.Fonts.Cyberpunk(size: 30))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
+                        .foregroundColor(R.Colors.indicatorsFlashing)
+                        .scaleEffect(gameVM.scaleEffect)
+                        .padding(.bottom, 20)
+
                     GameBoardView(geometry: geometry)
-                        .opacity(startVM.showDesk)
                     
                     Spacer()
                     VStack(spacing: 10) {
                         TurnView()
                         WinRatesView()
-                            .padding(.horizontal)
+                            
                     }
+                    .padding(.horizontal)
                     Spacer()
                     
                     AIStatusView()
