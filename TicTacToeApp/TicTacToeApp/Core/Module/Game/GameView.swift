@@ -45,7 +45,6 @@ struct GameView: View {
                     VStack(spacing: 10) {
                         TurnView()
                         WinRatesView()
-                            
                     }
                     .padding(.horizontal)
                     Spacer()

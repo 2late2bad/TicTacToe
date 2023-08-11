@@ -18,7 +18,7 @@ final class GameViewModel: ObservableObject {
     private let storage: StorageServiceProtocol = StorageService.shared
     var isCrossTurn: Bool            = true
     var roundLabelRotation: Double   = 360
-    var winningCells: [Int]          = []
+    var winningCells: Set<Int>       = []
     var (currentRound, xWins, oWins) = (1, 0, 1)
     
     @Published var moves: [Move?]                 = R.Indicators.resetMoves
@@ -40,6 +40,8 @@ final class GameViewModel: ObservableObject {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { [self] in
                     selectedComplexity = .Easy
                 }
+            } else {
+                reaction.soundTestYourMight()
             }
         }
     }
@@ -117,11 +119,6 @@ final class GameViewModel: ObservableObject {
             }
         }
     }
-    
-    // Выход из игры
-    func exitGame() {
-        isGameboardDisabled = true
-    }
 }
 
 // MARK: - Private methods
@@ -140,7 +137,7 @@ private extension GameViewModel {
         let playerPosition = Set(allPlayerMoves.map { $0.boardIndex })
         
         for pattern in winPatterns where pattern.isSubset(of: playerPosition) {
-            pattern.forEach { winningCells.append($0) }
+            pattern.forEach { winningCells.insert($0) }
             return true
         }
         return false
@@ -254,11 +251,10 @@ private extension GameViewModel {
     
     // Анимация победной линии
     func winLineAnimation() {
-        let animation = Animation.easeInOut(duration: 0.1).repeatCount(7, autoreverses: true)
-        withAnimation(animation.delay(0.3)) {
+        withAnimation(.easeInOut(duration: 0.1).repeatCount(7, autoreverses: true).delay(0.3)) {
             indicatorColor = R.Colors.indicatorsFlashing
         }
-        withAnimation(.default.delay(1)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.05) { [self] in
             indicatorColor = R.Colors.indicatorDefault
         }
     }
