@@ -9,6 +9,8 @@ import SwiftUI
 
 final class StartViewModel: ObservableObject {
     
+    @Published var isViewDisabled: Bool = false
+    
     @Published var showGame: Bool = false
     @Published var showDesk: Double = 1
     @Published var showInfo: Bool = false
@@ -56,6 +58,13 @@ final class StartViewModel: ObservableObject {
         
         withAnimation {
             showGame = status
+        }
+    }
+    
+    func waitLoad(delay: Double) {
+        isViewDisabled = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [self] in
+            isViewDisabled = false
         }
     }
 }

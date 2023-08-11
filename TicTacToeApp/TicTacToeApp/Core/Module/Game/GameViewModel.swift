@@ -34,14 +34,16 @@ final class GameViewModel: ObservableObject {
     @Published var sumOfWins: Int = 1 { willSet { oWins = newValue } }
     @Published var alertItem: AlertModel?
     
-    let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence()
-    let reaction: ReactionServiceProtocol = ReactionService()
+    private let ai: ArtificialIntelligenceProtocol = ArtificialIntelligence.shared
+    private let reaction: ReactionServiceProtocol = ReactionService.shared
     private let storage: StorageServiceProtocol = StorageService.shared
-    var (isCrossTurn, showingOutcome)                 = (true, false)
-    var textOutcome: String                           = "FIGHT!"
+    var isCrossTurn = true
+    
+    @Published var scaleEffect: Double = 0.001
+    @Published var textOutcome: String = ""
+    
     var roundLabelRotation: Double                    = 360
     var winningCells: [Int]                           = []
-    var (indicatorCrossOpacity, indicatorZeroOpacity) = (0.0, 0.0)
     var (currentRound, xWins, oWins)                  = (1, 0, 1)
     
     // Ход игрока/AI
@@ -94,23 +96,14 @@ final class GameViewModel: ObservableObject {
         
     }
     
-    // Старт следующего раунда (либо рестарт матча)
-    func newRound(andMatch: Bool) {
-        moves = R.Indicators.resetMoves
-        winningCells = []
-        isCrossTurn = true
-        isGameboardDisabled = false
-        if andMatch {
-            currentRound = 1
-            xWins = 0
-            oWins = sumOfWins
-        } else {
-            reloadAnimation()
-            currentRound += 1
-            indicatorCrossOpacity = 0
-            indicatorZeroOpacity = 0
-            showingOutcome = false
-        }
+    // Рестарт матча
+    func restartMatch() {
+        resetDesk()
+        currentRound = 1
+        xWins = 0
+        oWins = sumOfWins
+        textOutcome = reaction.startGame()
+        reactAnimation(delay: 1)
     }
 }
 
@@ -149,40 +142,42 @@ private extension GameViewModel {
             if (xWins + 1) == sumOfWins {
                 matchWinner(.cross)
             } else {
-                endRound(point: .cross)
+                newRound(point: .cross)
             }
         case .zero:
             winLineAnimation()
             if (oWins - 1) == 0 {
                 matchWinner(.zero)
             } else {
-                endRound(point: .zero)
+                newRound(point: .zero)
             }
         default:
-            endRound(point: nil)
+            newRound(point: nil)
         }
     }
     
-    // Подведение итогов раунда
-    func endRound(point: Player?) {
+    // Старт нового раунда
+    func newRound(point: Player?) {
         switch point {
         case .cross:
-            winRateAnimation(.cross)
             textOutcome = reaction.roundResult(xPoint: xWins + 1, oPoint: oWins, sumOfWins: sumOfWins)
         case .zero:
-            winRateAnimation(.zero)
             textOutcome = reaction.roundResult(xPoint: xWins, oPoint: oWins - 1, sumOfWins: sumOfWins)
         case nil:
             drawAnimation()
             textOutcome = reaction.roundResult(xPoint: 0, oPoint: 0, sumOfWins: 0)
         }
         
-        showingOutcome = true
+        reactAnimation(delay: 0)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            newRound(andMatch: false)
-            if point != nil {
-                point == .cross ? (xWins += 1) : (oWins -= 1)
+            resetDesk()
+            roundLabelAnimation()
+            guard let point else { return }
+            if point == .cross {
+                xWins += 1
+            } else {
+                oWins -= 1
             }
         }
     }
@@ -191,10 +186,9 @@ private extension GameViewModel {
     func matchWinner(_ player: Player) {
         player == .cross ? (xWins += 1) : (oWins -= 1)
         textOutcome = reaction.matchResult(player: player, typeGame: selectedTypeOfGame)
-        showingOutcome = true
+        reactAnimation(delay: 0)
         saveMatch(winner: player)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            showingOutcome = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.05) { [self] in
             withAnimation {
                 showingSheet = true
             }
@@ -210,24 +204,33 @@ private extension GameViewModel {
                                  date: .now)
         storage.append(object: record, forKey: .records)
     }
+    
+    // Сброс доски
+    func resetDesk() {
+        moves = R.Indicators.resetMoves
+        winningCells = []
+        isCrossTurn = true
+        isGameboardDisabled = false
+    }
 }
 
 // MARK: - Animations
 private extension GameViewModel {
     
-    // Анимация добавления индикатора игрока в его пул побед
-    func winRateAnimation(_ player: Player) {
-        switch player {
-        case .cross:
-            indicatorCrossOpacity = 1
-        case .zero:
-            indicatorZeroOpacity = 1
-        }
+    // Анимация лейба при новом раунде
+    func roundLabelAnimation() {
+        roundLabelRotation == 360 ? (roundLabelRotation) = 0 : (roundLabelRotation = 360)
+        currentRound += 1
     }
     
-    // Анимация элементов при смене раунда
-    func reloadAnimation() {
-        roundLabelRotation == 360 ? (roundLabelRotation) = 0 : (roundLabelRotation = 360)
+    // Анимация сообщения реакции
+    func reactAnimation(delay: Double) {
+        withAnimation(.easeInOut.delay(delay)) {
+            scaleEffect = 1
+        }
+        withAnimation(.default.delay(delay + 1)) {
+            scaleEffect = 0.001
+        }
     }
     
     // Анимация победной линии

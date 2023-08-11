@@ -10,6 +10,7 @@ import SwiftUI
 struct GoButtonView: View {
     
     @EnvironmentObject var startVM: StartViewModel
+    @EnvironmentObject var gameVM: GameViewModel
 
     var body: some View {
         Button {

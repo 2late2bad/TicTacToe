@@ -13,6 +13,8 @@ protocol ArtificialIntelligenceProtocol {
 }
 
 final class ArtificialIntelligence {
+    static let shared = ArtificialIntelligence()
+    private init() {}
     // Helper
     private func isCellNotEmpty(in moves: [Move?], for index: Int) -> Bool {
         moves.contains(where: { $0?.boardIndex == index })

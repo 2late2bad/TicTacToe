@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StartView: View {
     
-    @StateObject var startVM: StartViewModel = StartViewModel()
+    @StateObject var startVM = StartViewModel()
     @EnvironmentObject var gameVM: GameViewModel
     
     init() {
@@ -43,6 +43,7 @@ struct StartView: View {
                         .onAppear {
                             startVM.showWaves.toggle()
                         }
+                        .disabled(startVM.isViewDisabled)
                     Spacer()
                     GameDefinitionView(startVM: startVM)
                         .opacity(startVM.opacityNeedAnim)

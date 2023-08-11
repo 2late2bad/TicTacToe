@@ -30,24 +30,19 @@ struct GameView: View {
                             .foregroundColor(R.Colors.text)
                             .rotation3DEffect(.degrees(gameVM.roundLabelRotation), axis: (x: 1, y: 0, z: 0))
                             .animation(.spring(dampingFraction: 0.7), value: gameVM.roundLabelRotation)
-
-                        VStack(spacing: 0) {
-                            if gameVM.showingOutcome {
-                                Text(gameVM.textOutcome)
-                                    .font(R.Fonts.Cyberpunk(size: 30))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.9)
-                                    .foregroundColor(R.Colors.indicatorsFlashing)
-                                    .transition(.scale)
-                            }
-                        }
-                        .frame(height: 40)
-                        .animation(.easeInOut(duration: 0.3),
-                                   value: gameVM.showingOutcome)
+                        
+                        Text(gameVM.textOutcome)
+                            .frame(height: 40)
+                            .font(R.Fonts.Cyberpunk(size: 30))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.9)
+                            .foregroundColor(R.Colors.indicatorsFlashing)
+                            .scaleEffect(gameVM.scaleEffect)
                     }
                     .padding(.bottom, 10)
                     
                     GameBoardView(geometry: geometry)
+                        .opacity(startVM.showDesk)
                     
                     Spacer()
                     VStack(spacing: 10) {
@@ -59,14 +54,17 @@ struct GameView: View {
                     
                     AIStatusView()
                 }
-                .opacity(startVM.showDesk)
                 .scenePadding([.top, .bottom])
                 
                 if gameVM.showingSheet {
                     WinnerView()
-                        .zIndex(1)
-                        .transition(.scale.combined(with: .opacity).animation(Animation.spring(response: 0.3, dampingFraction: 0.7)))
+                        .zIndex(2)
+                        .transition(.asymmetric(insertion: .scale.combined(with: .opacity).animation(.spring(response: 0.3, dampingFraction: 0.7)),
+                                                removal: .scale.combined(with: .opacity).animation(.spring(response: 0.3, dampingFraction: 0.7))))
                 }
+            }
+            .onAppear {
+                gameVM.restartMatch()
             }
         }
         .toolbar(.hidden, for: .bottomBar)
@@ -80,10 +78,5 @@ struct GameView: View {
                             titleVisibility: .visible,
                             actions: { AlertButtonsView() },
                             message: { Text("ai_difficalty_select".localized) })
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                gameVM.newRound(andMatch: true)
-            }
-        }
     }
 }
