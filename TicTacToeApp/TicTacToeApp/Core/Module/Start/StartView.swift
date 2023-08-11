@@ -43,7 +43,7 @@ struct StartView: View {
                         .onAppear {
                             startVM.showWaves.toggle()
                         }
-                        .disabled(startVM.isViewDisabled)
+                        .disabled(startVM.isButtonGoDisabled)
                     Spacer()
                     GameDefinitionView(startVM: startVM)
                         .opacity(startVM.opacityNeedAnim)

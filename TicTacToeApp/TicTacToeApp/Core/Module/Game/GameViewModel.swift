@@ -45,9 +45,9 @@ final class GameViewModel: ObservableObject {
     }
     @Published var sumOfWins: Int = 1 { willSet { oWins = newValue } }
     @Published var alertItem: AlertModel?
-    @Published var scaleEffect: Double = 0.001
+    @Published var scaleEffect: Double = 0.0
     @Published var textOutcome: String = ""
-    
+    @Published var opacityEffect: Double = 0.0
     
     // Ход игрока/AI
     func processPlayerMove(for position: Int) {
@@ -112,7 +112,9 @@ final class GameViewModel: ObservableObject {
         reactAnimation(delay: 1)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            isGameboardDisabled = false
+            withAnimation {
+                isGameboardDisabled = false
+            }
         }
     }
     
@@ -240,11 +242,13 @@ private extension GameViewModel {
     
     // Анимация сообщения реакции
     func reactAnimation(delay: Double) {
-        withAnimation(.easeInOut.delay(delay)) {
+        withAnimation(.easeInOut.delay(delay + 0.1)) {
+            opacityEffect = 1
             scaleEffect = 1
         }
         withAnimation(.easeInOut.delay(delay + 1)) {
-            scaleEffect = 0.01
+            opacityEffect = 0
+            scaleEffect = 0.1
         }
     }
     

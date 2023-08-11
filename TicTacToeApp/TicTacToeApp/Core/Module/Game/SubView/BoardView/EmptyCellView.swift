@@ -15,7 +15,8 @@ struct EmptyCellView: View {
     
     var body: some View {
         Rectangle()
-            .fill(gameVM.isGameboardDisabled ? .clear : R.Colors.background)
+            .foregroundColor(R.Colors.background)
+            .opacity(gameVM.isGameboardDisabled ? 0 : 1)
             .frame(width: proxy.size.width/3 - 15,
                    height: proxy.size.width/3 - 15)
     }

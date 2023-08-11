@@ -36,6 +36,7 @@ struct GameView: View {
                         .minimumScaleFactor(0.9)
                         .foregroundColor(R.Colors.indicatorsFlashing)
                         .scaleEffect(gameVM.scaleEffect)
+                        .opacity(gameVM.opacityEffect)
                         .padding(.bottom, 20)
 
                     GameBoardView(geometry: geometry)

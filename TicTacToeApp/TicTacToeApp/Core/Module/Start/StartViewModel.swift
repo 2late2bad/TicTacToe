@@ -9,7 +9,7 @@ import SwiftUI
 
 final class StartViewModel: ObservableObject {
     
-    @Published var isViewDisabled: Bool = false
+    @Published var isButtonGoDisabled: Bool = false
     
     @Published var showGame: Bool = false
     @Published var showInfo: Bool = false
@@ -59,9 +59,9 @@ final class StartViewModel: ObservableObject {
     }
     
     func waitLoad(delay: Double) {
-        isViewDisabled = true
+        isButtonGoDisabled = true
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [self] in
-            isViewDisabled = false
+            isButtonGoDisabled = false
         }
     }
 }
