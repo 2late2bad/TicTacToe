@@ -53,6 +53,7 @@ https://github.com/2late2bad/TicTacToe/assets/121951550/9b834870-1b53-4393-b3cb-
 * GCD
 * Animation
 * UserDefaults
+* Shape
 * AVKit
 
 ## Highlights
