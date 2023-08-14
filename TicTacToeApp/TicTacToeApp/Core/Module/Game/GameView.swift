@@ -53,7 +53,7 @@ struct GameView: View {
                 }
                 .scenePadding([.top, .bottom])
                 
-                if gameVM.showingSheet {
+                if gameVM.showingWinner {
                     WinnerView()
                         .zIndex(2)
                         .transition(.asymmetric(insertion: .scale.combined(with: .opacity).animation(.spring(response: 0.3, dampingFraction: 0.7)),

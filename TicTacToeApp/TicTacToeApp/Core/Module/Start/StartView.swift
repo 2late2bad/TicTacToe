@@ -10,7 +10,6 @@ import SwiftUI
 struct StartView: View {
     
     @StateObject var startVM = StartViewModel()
-    @EnvironmentObject var gameVM: GameViewModel
     
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(R.Colors.useElement)

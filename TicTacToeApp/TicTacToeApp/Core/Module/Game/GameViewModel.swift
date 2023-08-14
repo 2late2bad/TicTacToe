@@ -25,12 +25,7 @@ final class GameViewModel: ObservableObject {
     @Published var indicatorColor: Color          = R.Colors.indicatorDefault
     @Published var gridColor: Color               = R.Colors.grid
     @Published var isGameboardDisabled            = true
-    @Published var muteSound: Bool                = false {
-        willSet {
-            reaction.muteSoundEffect = newValue
-        }
-    }
-    @Published var showingSheet: Bool             = false
+    @Published var showingWinner: Bool            = false
     @Published var showingAlert: Bool             = false
     @Published var showingActiveAIDialog: Bool    = false
     @Published var selectedComplexity: Complexity = .Easy
@@ -43,6 +38,11 @@ final class GameViewModel: ObservableObject {
             } else {
                 reaction.soundTestYourMight()
             }
+        }
+    }
+    @Published var muteSound: Bool                = false {
+        willSet {
+            reaction.muteSoundEffect = newValue
         }
     }
     @Published var sumOfWins: Int = 1 { willSet { oWins = newValue } }
@@ -103,15 +103,19 @@ final class GameViewModel: ObservableObject {
     
     // Рестарт матча
     func restartMatch() {
-        currentRound = 1
-        xWins = 0
-        oWins = sumOfWins
         moves = R.Indicators.resetMoves
         winningCells = []
         isCrossTurn = true
         
         textOutcome = reaction.startGame()
         reactAnimation(delay: 1)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            currentRound = 1
+            xWins = 0
+            oWins = sumOfWins
+            
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             withAnimation {
@@ -204,7 +208,7 @@ private extension GameViewModel {
         saveMatch(winner: player)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.05) { [self] in
             withAnimation {
-                showingSheet = true
+                showingWinner = true
             }
         }
     }
@@ -228,7 +232,7 @@ private extension GameViewModel {
     }
 }
 
-// MARK: - Animations
+// MARK: - Animation work
 private extension GameViewModel {
     
     // Анимация лейба при новом раунде
